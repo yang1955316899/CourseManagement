@@ -5,9 +5,10 @@
     <title>JSP - Hello World</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form action="LoginServlet?action=loginJudge" method="post">
+    学号<input type="text" name="userId">
+    密码 <input type="password" name="password">
+    提交 <input type="submit">
+</form>
 </body>
 </html>
