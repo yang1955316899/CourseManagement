@@ -2,25 +2,18 @@ package top.jsjkxyjs.dao.impl;
 
 import top.jsjkxyjs.dao.ActionDao;
 import top.jsjkxyjs.entity.Action;
-import top.jsjkxyjs.util.BaseUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActionDaoImpl implements ActionDao {
-	Connection conn = null;
-	PreparedStatement ps = null;
-	ResultSet rs = null;
-
-	BaseUtil util = new BaseUtil();
-
+public class ActionDaoImpl extends BaseDao implements ActionDao {
+	/**
+	 * 根据t_role表中的actionId获取 相应的 action集和
+	 */
 	@Override
 	public List<Action> getActions(String roleActionId) {
 		List<Action> actionsList = new ArrayList<>();
-		conn = util.getConnection();
+		conn = getConnection();
 
 		String sql = "select * from t_action where id in (" + roleActionId + ")";
 		try {
@@ -37,17 +30,21 @@ public class ActionDaoImpl implements ActionDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.close(conn, ps, rs);
+			closeAll(rs, ps, conn);
 		}
 
 		return actionsList;
 	}
 
+
+	/**
+	 * 获取所有的子action
+	 */
 	@Override
 	public List<Action> getAllActions() {
 		List<Action> allActionsList = new ArrayList<>();
 		String sql = "select * from t_action where pId <> 0";
-		conn = util.getConnection();
+		conn = getConnection();
 
 		try {
 			ps = conn.prepareStatement(sql);
@@ -63,8 +60,33 @@ public class ActionDaoImpl implements ActionDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			util.close(conn, ps, rs);
+			closeAll(rs, ps, conn);
 		}
 		return allActionsList;
+	}
+
+
+	/**
+	 * 通过roleId 获取相应的 actionId
+	 */
+	@Override
+	public String getActionId(int roleId) {
+		String actionId = "";
+		conn = getConnection();
+		String sql = "select * from t_role where id = ?";
+
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, roleId);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				actionId = rs.getString("ActionID");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(rs, ps, conn);
+		}
+		return actionId;
 	}
 }

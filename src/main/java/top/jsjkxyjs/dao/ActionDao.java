@@ -15,4 +15,9 @@ public interface ActionDao {
 	 * 获取action表中所有的子菜单
 	 */
 	List<Action> getAllActions();
+
+	/**
+	 * 通过roleId 获取相应的 actionId
+	 */
+	String getActionId(int roleId);
 }

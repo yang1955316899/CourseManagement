@@ -1,3 +1,9 @@
+<%@ page import="top.jsjkxyjs.entity.Action" %>
+<%@ page import="java.util.List" %>
+<%@ page import="top.jsjkxyjs.service.ActionService" %>
+<%@ page import="top.jsjkxyjs.service.impl.ActionServiceImpl" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: SeRein
@@ -6,7 +12,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 
 <!DOCTYPE html>
 <html>
@@ -46,12 +51,12 @@
                 <a href="javascript:">
                     <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
                          class="layui-nav-img">
-                    tester
+                    ${user.getUserName()}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">Your Profile</a></dd>
                     <dd><a href="">Settings</a></dd>
-                    <dd><a href="">Sign out</a></dd>
+                    <dd><a href="SignOutServlet?action=signOut">退出系统</a></dd>
                 </dl>
             </li>
             <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
@@ -66,26 +71,19 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
 
-                    <a class="" href="javascript:">menu group 1</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:">menu 1</a></dd>
-                        <dd><a href="javascript:">menu 2</a></dd>
-                        <dd><a href="javascript:">menu 3</a></dd>
-                        <dd><a href="">the links</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:">menu group 2</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:">list 1</a></dd>
-                        <dd><a href="javascript:">list 2</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:">click menu item</a></li>
-                <li class="layui-nav-item"><a href="">the links</a></li>
+                <c:forEach items="${requestScope.actionsList}" var="action">
+                    <li class="layui-nav-item">
+                        <a class="" href="javascript:">${action.title}</a>
+                        <dl class="layui-nav-child">
+                            <c:forEach items="${requestScope.allActionsList}" var="allActions">
+                                <c:if test="${action.id == allActions.pId}">
+                                    <dd><a href="javascript:">${allActions.title}</a></dd>
+                                </c:if>
+                            </c:forEach>
+                        </dl>
+                    </li>
+                </c:forEach>
             </ul>
         </div>
     </div>

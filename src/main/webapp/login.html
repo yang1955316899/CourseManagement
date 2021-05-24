@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>登录界面</title>
+    <title>JSP - Hello World</title>
+    <meta charset="utf-8">
 </head>
 <body>
-<h1>这是登录界面</h1>
+<form action="SignServlet?action=signIn" method="post">
+    学号<input name="userId" type="text">
+    密码 <input name="password" type="password">
+    提交 <input type="submit">
+</form>
 </body>
 </html>
