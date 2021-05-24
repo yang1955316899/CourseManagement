@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class StudentServlet {
-    public void queryMyGrade(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //获取用户的id
-        String userId = req.getParameter("id");
+	public void queryMyGrade(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//获取用户的id
+		String userId = req.getParameter("id");
 
-    }
+	}
 
 }
