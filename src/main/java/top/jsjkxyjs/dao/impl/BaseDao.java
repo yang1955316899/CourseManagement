@@ -64,8 +64,9 @@ public class BaseDao {
 		try {
 			ps = conn.prepareStatement(sql);
 			if (args != null) {
-				for (int index = 0; index < args.length; index++)
+				for (int index = 0; index < args.length; index++) {
 					ps.setString(index + 1, args[index]);
+				}
 			}
 			rs = ps.executeQuery();
 			while (rs.next()) {
