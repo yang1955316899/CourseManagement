@@ -80,12 +80,12 @@ public class BaseDao {
 		return list;
 	}
 
-	public List<String> getStrings(String sql, int args, String returnType) {
+	public List<String> getStrings(String sql, int arg, String returnType) {
 		List<String> list = new ArrayList<>();
 		conn = getConnection();
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, "" + args);
+			ps.setString(1, "" + arg);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(rs.getString(returnType));
@@ -96,6 +96,21 @@ public class BaseDao {
 			closeAll(rs, ps, conn);
 		}
 		return list;
+	}
+
+	public String getString(String sql, String arg, String returnType) {
+		conn = getConnection();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "" + arg);
+			rs = ps.executeQuery();
+			return rs.getString(returnType);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(rs, ps, conn);
+		}
+		return null;
 	}
 
 	public void closeAll(ResultSet rs, PreparedStatement ps, Connection conn) {

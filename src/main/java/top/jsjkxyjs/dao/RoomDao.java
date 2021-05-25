@@ -11,4 +11,6 @@ public interface RoomDao {
 	int getMaxSizeById(int id);
 
 	List<String> getRoomUseByTime(int locationId, int year, int semester, int day);
+
+	String getRoomByCourseId(String CourseId);
 }
