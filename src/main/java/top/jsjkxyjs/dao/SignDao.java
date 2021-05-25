@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface SignDao {
-    int getRoleId(User user);
+	int getRoleId(User user);
 
-    void signOut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
+	void signOut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException;
 }

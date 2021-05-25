@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CounselorServlet extends BaseServlet {
-    public void viewClassForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void viewClassForm(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    }
+	}
 }
