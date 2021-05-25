@@ -7,6 +7,24 @@ public class User {
 	private String userName;
 	private String password;
 	private int sex;
+	private int classId;
+	private int age;
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getClassId() {
+		return classId;
+	}
+
+	public void setClassId(int classId) {
+		this.classId = classId;
+	}
 
 	public int getId() {
 		return id;

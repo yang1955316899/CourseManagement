@@ -34,7 +34,7 @@ public class BaseDao {
 			ps = conn.prepareStatement(sql);
 			if (arr != null && arr.length > 0) {
 				for (int tem = 1; tem <= arr.length; tem++) {
-					ps.setString(tem, arr[tem]);
+					ps.setString(tem, arr[tem - 1]);
 				}
 			}
 			cou = ps.executeUpdate();
