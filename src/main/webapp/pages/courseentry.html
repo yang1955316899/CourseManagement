@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>课程录入</title>
+    <link href="../static/layuiadmin/layui/css/layui.css" rel="stylesheet">
+</head>
+
+<body>
+<script src="../static/layuiadmin/layui/layui.js"></script>
+
+<div class="layui-fluid">
+    <form action="" class="layui-form" method="re();">
+        <div class="layui-form-item">
+            <label class="layui-form-label">课程名称</label>
+            <div class="layui-input-block">
+                <input autocomplete="off" class="layui-input" name="title" placeholder="请输入课程名称"
+                       required type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">人数</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" name="MaxSize" placeholder="请输入人数"
+                       required type="MaxSize">
+            </div>
+            <div class="layui-form-mid layui-word-aux">注意:房间最大容量一定要大于课程最大人数</div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">学分</label>
+            <div class="layui-input-inline">
+                <input autocomplete="off" class="layui-input" name="Creadit" placeholder="请输入学分"
+                       required type="MaxSize">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">学年</label>
+                <div class="layui-input-inline">
+                    <input autocomplete="off" class="layui-input" name="Creadit" placeholder="请输入学年"
+                           required type="MaxSize">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">学期</label>
+                <div class="layui-input-block">
+                    <select lay-search name="Semester">
+                        <option selected="selected" value="1">第一学期</option>
+                        <option value="2">第二学期</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">教学楼</label>
+                    <div class="layui-input-block">
+                        <select lay-search name="location">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">教室</label>
+                    <div class="layui-input-block">
+                        <select lay-search name="room">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">课时</label>
+            <div class="layui-input-block">
+                <input name="1" title="1" type="checkbox">
+                <input name="2" title="2" type="checkbox">
+                <input name="3" title="3" type="checkbox">
+                <input name="4" title="4" type="checkbox">
+                <input name="5" title="5" type="checkbox">
+                <input name="6" title="6" type="checkbox">
+                <input name="7" title="7" type="checkbox">
+                <input name="8" title="8" type="checkbox">
+                <input name="9" title="9" type="checkbox">
+                <input name="10" title="10" type="checkbox">
+                <input name="11" title="11" type="checkbox">
+                <input name="12" title="12" type="checkbox">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否是选修课</label>
+            <div class="layui-input-block">
+                <input lay-skin="switch" name="switch" type="checkbox">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">课程简介</label>
+            <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="desc"
+                              placeholder="课程简介,请输入少于500字的文字简介"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" id="lay-submit" lay-filter="formDemo" lay-submit>立即提交</button>
+                <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    layui.use(['layer', 'form'], function () {
+        var layer = layui.layer
+            , form = layui.form;
+        form.on('submit(formDemo)', function (data) {
+            layer.msg(JSON.stringify(data.field));
+            return false;
+        })
+    });
+</script>
+</body>
+
+</html>

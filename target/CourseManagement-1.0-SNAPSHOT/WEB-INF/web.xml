@@ -12,12 +12,14 @@
         <servlet-name>SignServlet</servlet-name>
         <url-pattern>/SignServlet</url-pattern>
     </servlet-mapping>
+
     <servlet>
-        <servlet-name>Course</servlet-name>
-        <servlet-class>top.jsjkxyjs.controller.CourseServlet</servlet-class>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>top.jsjkxyjs.controller.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>Course</servlet-name>
-        <url-pattern>/Course</url-pattern>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/UserServlet</url-pattern>
     </servlet-mapping>
+
 </web-app>
