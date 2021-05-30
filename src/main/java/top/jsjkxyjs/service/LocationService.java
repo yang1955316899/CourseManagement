@@ -1,7 +1,11 @@
 package top.jsjkxyjs.service;
 
+import top.jsjkxyjs.entity.Location;
+
 import java.util.List;
 
 public interface LocationService {
-	List<String> getLocation();
+	List<Location> getLocation();
+
+	List<Location> getRoomByLocationId(int locationId);
 }

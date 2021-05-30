@@ -2,21 +2,60 @@ package top.jsjkxyjs.dao.impl;
 
 
 import top.jsjkxyjs.dao.RoomDao;
+import top.jsjkxyjs.entity.Location;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomDaoImpl extends BaseDao implements RoomDao {
 
 	@Override
-	public List<String> getRoomByLocationId(int id) {
-		String sql = "select Title from t_location where PID = ?";
-		return getStrings(sql, id, "Title");
+	public List<Location> getRoomByLocationId(int locationId) {
+		String sql = "select * from t_location where PID = ?";
+		conn = getConnection();
+		List<Location> location = new ArrayList<>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, "" + locationId);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Location tem = new Location();
+				tem.setId(rs.getInt("id"));
+				tem.setTitle(rs.getString("Title"));
+				tem.setPID(rs.getInt("PID"));
+				tem.setMaxSize(rs.getInt("MaxSize"));
+				location.add(tem);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(rs, ps, conn);
+		}
+		return location;
 	}
 
 	@Override
-	public List<String> getAllLocation() {
-		String sql = "select Title from t_location where PID = 0";
-		return getStrings(sql, null, "Title");
+	public List<Location> getAllLocation() {
+		conn = getConnection();
+		List<Location> location = new ArrayList<>();
+		String sql = "select * from t_location where PID = 0";
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Location tem = new Location();
+				tem.setId(rs.getInt("id"));
+				tem.setTitle(rs.getString("Title"));
+				tem.setPID(rs.getInt("PID"));
+				tem.setMaxSize(rs.getInt("MaxSize"));
+				location.add(tem);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeAll(rs, ps, conn);
+		}
+		return location;
 	}
 
 	@Override

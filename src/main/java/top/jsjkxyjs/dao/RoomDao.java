@@ -1,12 +1,14 @@
 package top.jsjkxyjs.dao;
 
+import top.jsjkxyjs.entity.Location;
+
 import java.util.List;
 
 public interface RoomDao {
 
-	List<String> getRoomByLocationId(int id);
+	List<Location> getRoomByLocationId(int locationId);
 
-	List<String> getAllLocation();
+	List<Location> getAllLocation();
 
 	int getMaxSizeById(int id);
 
