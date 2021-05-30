@@ -145,6 +145,8 @@
         })
         form.on("select(location)", function () {
             var value = $("#location").val();
+            $('#room').empty();
+            $('#room').append($("<option selected=\"selected\" value=\"\">请选择</option>"));
             //异步请求
             $.ajax({
                 type: "POST",
