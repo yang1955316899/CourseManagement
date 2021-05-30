@@ -32,12 +32,10 @@ public class SignServlet extends BaseServlet {
 		SignService signService = new SignServiceImpl();
 		int roleId = signService.doSignIn(user);
 		if (roleId == 0) {
-			System.out.println("登录失败");
 			resp.sendRedirect("/index.html");
 		} else {
 			//通过 userId获取user对象的全部信息
 			user = signService.doGetInfo(userId);
-			System.out.println("username" + user.getUserName());
 
 			//通过roleId获取相应的actionId
 			String actionId = signService.doGetActionId(roleId);

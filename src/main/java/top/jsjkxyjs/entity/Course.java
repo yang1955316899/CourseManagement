@@ -11,6 +11,24 @@ public class Course {
 	int ClassCode;
 	float Creadit;
 	int Assistant;
+	String Desc;
+	int Choose;
+
+	public int getChoose() {
+		return Choose;
+	}
+
+	public void setChoose(int choose) {
+		Choose = choose;
+	}
+
+	public String getDesc() {
+		return Desc;
+	}
+
+	public void setDesc(String desc) {
+		Desc = desc;
+	}
 
 	public int getId() {
 		return id;

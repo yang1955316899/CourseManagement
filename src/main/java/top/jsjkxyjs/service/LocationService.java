@@ -8,4 +8,6 @@ public interface LocationService {
 	List<Location> getLocation();
 
 	List<Location> getRoomByLocationId(int locationId);
+
+	int getmaxSizeById(int roomId);
 }

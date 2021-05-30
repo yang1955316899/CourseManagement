@@ -13,7 +13,10 @@ public class CourseServlet extends BaseServlet {
 	}
 
 	public void getRoomByLocationId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		int location = Integer.parseInt(req.getParameter("location"));
-		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomByLocationId(location)));
+		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomByLocationId(Integer.parseInt(req.getParameter("location")))));
+	}
+
+	public void getMaxSizeById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomByLocationId(Integer.parseInt(req.getParameter("roomId")))));
 	}
 }

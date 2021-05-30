@@ -29,6 +29,8 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
 				course.setClassCode(rs.getInt("ClassCode"));
 				course.setCreadit(rs.getFloat("Creadit"));
 				course.setAssistant(rs.getInt("Assistant"));
+				course.setDesc(rs.getString("Desc"));
+				course.setChoose(rs.getInt("Choose"));
 				courses.add(course);
 			}
 		} catch (SQLException throwables) {

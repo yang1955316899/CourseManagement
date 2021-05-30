@@ -16,4 +16,9 @@ public class LocationServiceImpl implements LocationService {
 	public List<Location> getRoomByLocationId(int locationId) {
 		return new RoomDaoImpl().getRoomByLocationId(locationId);
 	}
+
+	@Override
+	public int getmaxSizeById(int roomId) {
+		return new RoomDaoImpl().getMaxSizeById(roomId);
+	}
 }
