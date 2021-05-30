@@ -9,167 +9,190 @@
 </head>
 
 <body>
-<script src="../static/layuiadmin/layui/layui.js"></script>
+    <script src="../static/layuiadmin/layui/layui.js"></script>
 
-<div class="layui-fluid">
-    <div class="layui-row">
-        <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
-            <form action="" class="layui-form" lay-filter="form">
-                <input name="Teacher" type="hidden" value="">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">课程名称</label>
-                    <div class="layui-input-block">
-                        <input autocomplete="off" class="layui-input" lay-verify="required" name="title"
-                               placeholder="请输入课程名称" required type="text">
+    <div class="layui-fluid">
+        <div class="layui-row">
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                <form action="" class="layui-form" lay-filter="form">
+                    <input name="Teacher" type="hidden" value="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">课程名称</label>
+                        <div class="layui-input-block">
+                            <input autocomplete="off" class="layui-input" lay-verify="required" name="title"
+                                placeholder="请输入课程名称" required type="text">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">人数</label>
-                    <div class="layui-input-inline">
-                        <input autocomplete="off" class="layui-input" lay-verify="required" name="MaxSize"
-                               placeholder="请输入人数" required type="MaxSize">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">人数</label>
+                        <div class="layui-input-inline">
+                            <input autocomplete="off" class="layui-input" id="MaxSize" lay-verify="required"
+                                name="MaxSize" placeholder="请输入人数" required type="text">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux" id="tips">注意:房间最大容量一定要大于课程最大人数</div>
                     </div>
-                    <div class="layui-form-mid layui-word-aux">注意:房间最大容量一定要大于课程最大人数</div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">学分</label>
-                    <div class="layui-input-inline">
-                        <input autocomplete="off" class="layui-input" lay-verify="required" name="Creadit"
-                               placeholder="请输入学分" required type="MaxSize">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <label class="layui-form-label">学年</label>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">学分</label>
                         <div class="layui-input-inline">
                             <input autocomplete="off" class="layui-input" lay-verify="required" name="Creadit"
-                                   placeholder="请输入学年" required type="MaxSize">
+                                placeholder="请输入学分" required type="text">
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <label class="layui-form-label">学期</label>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">学年</label>
+                            <div class="layui-input-inline">
+                                <input autocomplete="off" class="layui-input" lay-verify="required" name="Creadit"
+                                    placeholder="请输入学年" required type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">学期</label>
+                            <div class="layui-input-block">
+                                <select lay-search lay-verify="required" name="Semester">
+                                    <option selected="selected" value="1">第一学期</option>
+                                    <option value="2">第二学期</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">教学楼</label>
+                                <div class="layui-input-block">
+                                    <select id="location" lay-filter="location" lay-search name="location">
+                                        <option selected="selected" value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">教室</label>
+                                <div class="layui-input-block">
+                                    <select id="room" lay-filter="room" lay-search name="room">
+                                        <option selected="selected" value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">课时</label>
                         <div class="layui-input-block">
-                            <select lay-search lay-verify="required" name="Semester">
-                                <option selected="selected" value="1">第一学期</option>
-                                <option value="2">第二学期</option>
-                            </select>
+                            <input name="1" title="1" type="checkbox">
+                            <input name="2" title="2" type="checkbox">
+                            <input name="3" title="3" type="checkbox">
+                            <input name="4" title="4" type="checkbox">
+                            <input name="5" title="5" type="checkbox">
+                            <input name="6" title="6" type="checkbox">
+                            <input name="7" title="7" type="checkbox">
+                            <input name="8" title="8" type="checkbox">
+                            <input name="9" title="9" type="checkbox">
+                            <input name="10" title="10" type="checkbox">
+                            <input name="11" title="11" type="checkbox">
+                            <input name="12" title="12" type="checkbox">
                         </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-inline">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">教学楼</label>
-                            <div class="layui-input-block">
-                                <select id="location" lay-filter="location" lay-search name="location">
-                                    <option selected="selected" value="">请选择</option>
-                                </select>
-                            </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">是否是选修课</label>
+                        <div class="layui-input-block">
+                            <input lay-skin="switch" lay-verify="required" name="switch" type="checkbox">
                         </div>
                     </div>
-                    <div class="layui-inline">
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">教室</label>
-                            <div class="layui-input-block">
-                                <select id="room" lay-search name="room">
-                                    <option selected="selected" value="">请选择</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">课时</label>
-                    <div class="layui-input-block">
-                        <input name="1" title="1" type="checkbox">
-                        <input name="2" title="2" type="checkbox">
-                        <input name="3" title="3" type="checkbox">
-                        <input name="4" title="4" type="checkbox">
-                        <input name="5" title="5" type="checkbox">
-                        <input name="6" title="6" type="checkbox">
-                        <input name="7" title="7" type="checkbox">
-                        <input name="8" title="8" type="checkbox">
-                        <input name="9" title="9" type="checkbox">
-                        <input name="10" title="10" type="checkbox">
-                        <input name="11" title="11" type="checkbox">
-                        <input name="12" title="12" type="checkbox">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">是否是选修课</label>
-                    <div class="layui-input-block">
-                        <input lay-skin="switch" lay-verify="required" name="switch" type="checkbox">
-                    </div>
-                </div>
-                <div class="layui-form-item layui-form-text">
-                    <label class="layui-form-label">课程简介</label>
-                    <div class="layui-input-block">
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">课程简介</label>
+                        <div class="layui-input-block">
                             <textarea class="layui-textarea" lay-verify="required" name="desc"
-                                      placeholder="课程简介,请输入少于500字的文字简介"></textarea>
+                                placeholder="课程简介,请输入少于500字的文字简介"></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <button class="layui-btn" id="lay-submit" lay-filter="submit" lay-submit>立即提交</button>
-                        <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button class="layui-btn" id="lay-submit" lay-filter="submit" lay-submit>立即提交</button>
+                            <button class="layui-btn layui-btn-primary" type="reset">重置</button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
+
     </div>
-
-</div>
-<script>
-    layui.use(['layer', 'form'], function () {
-        var layer = layui.layer
-            , form = layui.form;
-        form.on('submit(form)', function (data) {
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "",
-                data: JSON.stringify(data.field),
-                success: function (result) {
-                    layer.msg("OK");
-                }
+    <script>
+        layui.use(['layer', 'form'], function () {
+            var layer = layui.layer
+                , form = layui.form;
+            form.on('submit(form)', function (data) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "",
+                    data: JSON.stringify(data.field),
+                    success: function (result) {
+                        layer.msg("OK");
+                    }
+                })
+                return false;
+            });
+            $(document).ready(function () {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "../Course?action=getAllLocation",
+                    success: function (result) {
+                        for (var index = 0; index < result.length; index++)
+                            $("#location").append($("<option value=" + result[index].id + ">" + result[index].Title + "</option>"));
+                        form.render('select', 'form');
+                    }
+                })
             })
-            return false;
+            form.on("select(location)", function () {
+                var value = $("#location").val();
+                $('#room').empty();
+                $('#room').append($("<option selected=\"selected\" value=\"\">请选择</option>"));
+                //异步请求
+                $.ajax({
+                    type: "POST",
+                    url: "../Course?action=getRoomByLocationId",
+                    dataType: "JSON",
+                    async: true,
+                    data: "location=" + value,
+                    success: function (result) {
+                        for (var index = 0; index < result.length; index++)
+                            $("#room").append($("<option value=" + result[index].id + ">" + result[index].Title + "</option>"));
+                        form.render('select');
+                    }
+                })
+            })
+            var MaxSizeTemp = -1;
+            form.on("select(room)", function (data) {
+                $.ajax({
+                    type: "POST",
+                    url: "../Course?action=getMaxSizeById",
+                    dataType: "JSON",
+                    async: true,
+                    data: "roomId=" + data.value,
+                    success: function (result) {
+                        MaxSizeTemp = result;
+                    }
+                })
+            });
+            // window.addEventListener('click', function () {
+            //     check();
+            // })
+            window.addEventListener('keyup', function () {
+                check();
+            })
+            function check() {
+                if (MaxSizeTemp != -1 && document.querySelector('#MaxSize').value.length > 0)
+                    if (MaxSizeTemp < $('#MaxSize').val())
+                       alert("注意:房间最大容量一定要大于课程最大人数");
+
+            }
         });
-        $(document).ready(function () {
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "../Course?action=getAllLocation",
-                success: function (result) {
-                    for (var index = 0; index < result.length; index++)
-                        $("#location").append($("<option value=" + result[index].id + ">" + result[index].Title + "</option>"));
-                    form.render('select', 'form');
-                }
-            })
-        })
-        form.on("select(location)", function () {
-            var value = $("#location").val();
-            $('#room').empty();
-            $('#room').append($("<option selected=\"selected\" value=\"\">请选择</option>"));
-            //异步请求
-            $.ajax({
-                type: "POST",
-                url: "../Course?action=getRoomByLocationId",
-                dataType: "JSON",
-                async: true,
-                data: "location=" + value,
-                success: function (result) {
-                    console.log(result);
-                    for (var index = 0; index < result.length; index++)
-                        $("#room").append($("<option value=" + result[index].id + ">" + result[index].Title + "</option>"));
-                    form.render('select');
-                }
-            })
-        })
 
-    });
-
-</script>
+    </script>
 </body>
 
 </html>
