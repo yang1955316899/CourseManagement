@@ -32,7 +32,8 @@ public class SignServlet extends BaseServlet {
 		SignService signService = new SignServiceImpl();
 		int roleId = signService.doSignIn(user);
 		if (roleId == 0) {
-			resp.sendRedirect("/login.html");
+			System.out.println("登录失败");
+			resp.sendRedirect("/index.html");
 		} else {
 			//通过 userId获取user对象的全部信息
 			user = signService.doGetInfo(userId);
@@ -53,7 +54,7 @@ public class SignServlet extends BaseServlet {
 			session.setAttribute("user", user);
 			req.setAttribute("actionsList", actionsList);
 			req.setAttribute("allActionsList", allActionsList);
-			req.getRequestDispatcher("/index.jsp").forward(req, resp);
+			req.getRequestDispatcher("pages/home.jsp").forward(req, resp);
 		}
 	}
 

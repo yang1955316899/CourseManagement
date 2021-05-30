@@ -14,6 +14,7 @@
           <element id="module-output" name="CourseManagement" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:4.0.1" />
           <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-frontend-jaxrs:3.4.2" />
           <element id="library" level="project" name="Maven: org.apache.cxf:cxf-core:3.4.2" />
           <element id="library" level="project" name="Maven: org.glassfish.jaxb:jaxb-runtime:2.3.3" />
