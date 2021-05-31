@@ -33,8 +33,8 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
 				course.setChoose(rs.getInt("Choose"));
 				courses.add(course);
 			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			closeAll(rs, ps, conn);
 		}

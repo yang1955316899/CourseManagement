@@ -8,15 +8,22 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CourseServlet extends BaseServlet {
-    public void getAllLocation(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getLocation()));
-    }
+	public void getAllLocation(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getLocation()));
+	}
 
-    public void getRoomByLocationId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomByLocationId(Integer.parseInt(req.getParameter("location")))));
-    }
+	public void getRoomByLocationId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomByLocationId(Integer.parseInt(req.getParameter("location")))));
+	}
 
-    public void getMaxSizeById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getmaxSizeById(Integer.parseInt(req.getParameter("roomId")))));
-    }
+	public void getMaxSizeById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getmaxSizeById(Integer.parseInt(req.getParameter("roomId")))));
+	}
+
+	public void getRoomUseByTime(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomUseByTime(Integer.parseInt(req.getParameter("RoomId")),
+				Integer.parseInt(req.getParameter("Year")),
+				Integer.parseInt(req.getParameter("Semester")),
+				Integer.parseInt(req.getParameter("Day")))));
+	}
 }

@@ -10,4 +10,6 @@ public interface LocationService {
 	List<Location> getRoomByLocationId(int locationId);
 
 	int getmaxSizeById(int roomId);
+
+	List<String> getRoomUseByTime(int locationId, int year, int semester, int day);
 }

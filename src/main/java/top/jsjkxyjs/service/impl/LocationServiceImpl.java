@@ -21,4 +21,8 @@ public class LocationServiceImpl implements LocationService {
 	public int getmaxSizeById(int roomId) {
 		return new RoomDaoImpl().getMaxSizeById(roomId);
 	}
+
+	public List<String> getRoomUseByTime(int locationId, int year, int semester, int day) {
+		return new RoomDaoImpl().getRoomUseByTime(locationId, year, semester, day);
+	}
 }
