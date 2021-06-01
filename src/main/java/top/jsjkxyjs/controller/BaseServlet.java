@@ -17,6 +17,7 @@ public class BaseServlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
 		String action = req.getParameter("action");
+		System.out.println("action: " + action);
 		try {
 			// 获取action业务鉴别字符串，获取相应的业务 方法反射对象
 			Method method = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);

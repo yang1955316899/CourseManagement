@@ -12,6 +12,7 @@
         <servlet-name>SignServlet</servlet-name>
         <url-pattern>/SignServlet</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>Course</servlet-name>
         <servlet-class>top.jsjkxyjs.controller.CourseServlet</servlet-class>
@@ -20,4 +21,15 @@
         <servlet-name>Course</servlet-name>
         <url-pattern>/Course</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CounselorServlet</servlet-name>
+        <servlet-class>top.jsjkxyjs.controller.CounselorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CounselorServlet</servlet-name>
+        <url-pattern>/CounselorServlet</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
