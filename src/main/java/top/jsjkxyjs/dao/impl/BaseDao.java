@@ -15,9 +15,9 @@ public class BaseDao {
 	public Connection getConnection() {
 		Connection conn = null;
 
-		String url = "jdbc:mysql://jsjkxyjs.top:3306/coursemanagement";
-		String user = "admin";
-		String password = "root";
+		String url = "jdbc:mysql://rm-uf6q3z5acf5pqa8l88o.mysql.rds.aliyuncs.com/coursemanagement";
+		String user = "yang1955316899";
+		String password = "Sorry418NotFound";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
