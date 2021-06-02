@@ -39,13 +39,6 @@ public class CounselorDaoImpl extends BaseDao implements CounselorDao {
         return list;
     }
 
-
-    @Override
-    public List<StudentGrade> viewGrade(int classId) {
-        List<StudentGrade> list = new ArrayList<>();
-        return list;
-    }
-
     /**
      * 调用此方法，删除相应学生的信息
      *
@@ -196,20 +189,53 @@ public class CounselorDaoImpl extends BaseDao implements CounselorDao {
      * @return 搜索结果信息
      */
     @Override
-    public int searchUser(int userId, String userName) {
-        int i = 0;
+    public List<User> searchUser(int userId, String userName, int classId) {
+        List<User> list = new ArrayList<>();
         conn = getConnection();
-        String sql = "select * from t_user where userId = ? or userName=?";
+        String sql;
+        if (userId != 0 && !userName.equals("")) {
+            sql = "select * from t_user where userId = ? and userName=? and classId=? and roleId=4";
+        } else if (userId == 0 && "".equals(userName)) {
+            sql = "select * from t_user where (userId = ? or userName=? or classId = ?) and roleId=4";
+        } else {
+            sql = "select * from t_user where (userId = ? or userName=?) and classId=? and roleId=4";
+        }
+
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userId);
             ps.setString(2, userName);
-            i = ps.executeUpdate();
+            ps.setInt(3, classId);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("userId"));
+                user.setUserName(rs.getString("userName"));
+                user.setPassword(rs.getString("password"));
+                user.setAge(rs.getInt("age"));
+                user.setSex(rs.getInt("sex"));
+                user.setClassId(rs.getInt("classId"));
+                user.setRoleId(4);
+                list.add(user);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             closeAll(rs, ps, conn);
         }
-        return i;
+        return list;
+    }
+
+    /**
+     * 获取班级学生的成绩信息
+     *
+     * @param classId 班级号
+     * @return 学生成绩列表
+     */
+    @Override
+    public List<StudentGrade> getGradesByClass(int classId) {
+        List<StudentGrade> list = new ArrayList<>();
+        conn = getConnection();
+        return list;
     }
 }

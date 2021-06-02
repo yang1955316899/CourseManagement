@@ -119,6 +119,7 @@
                 async: false,
                 success: function (data) {
                     console.log("添加成功");
+                    document.querySelector('.layui-layer-close').click();
                 },
                 error: function () {
                     console.log("回调失败");
@@ -130,6 +131,5 @@
         });
     });
 </script>
-
 </body>
 </html>

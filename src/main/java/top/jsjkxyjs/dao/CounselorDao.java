@@ -12,11 +12,6 @@ public interface CounselorDao {
      **/
     List<User> getClassUser(int classId);
 
-    /**
-     * 调用此方法，查看班级学生的成绩
-     **/
-    List<StudentGrade> viewGrade(int classId);
-
 
     /**
      * 调用此方法，删除相应学生的信息
@@ -66,5 +61,15 @@ public interface CounselorDao {
      * @param userName 用户名
      * @return 搜索结果信息
      */
-    int searchUser(int userId, String userName);
+    List<User> searchUser(int userId, String userName, int classId);
+
+
+    /**
+     * 获取班级学生的成绩信息
+     *
+     * @param classId 班级号
+     * @return 学生成绩列表
+     */
+    List<StudentGrade> getGradesByClass(int classId);
+
 }

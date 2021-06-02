@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: SeRein
+  Date: 2021/6/1
+  Time: 8:44
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +29,20 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">学生学号</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" name="userId" type="text">
+                                <input autocomplete="off" class="layui-input" name="userId" type="text"
+                                       lay-verify="userId">
                             </div>
                         </div>
-
                         <div class="layui-inline">
                             <label class="layui-form-label">学生姓名</label>
                             <div class="layui-input-inline">
-                                <input autocomplete="off" class="layui-input" name="userName" type="text">
+                                <input autocomplete="off" class="layui-input" name="userName" type="text"
+                                       lay-verify="userName">
                             </div>
                         </div>
+                        <!--隐藏域，存放classId-->
+                        <input type="hidden" name="classId" id="classId" value="${sessionScope.myClass.id}">
+
                         <div class="layui-inline">
                             <button class="layui-btn layui-btn-primary" lay-filter="data-search-btn" lay-submit
                                     type="submit"><i class="layui-icon"></i> 搜 索
@@ -51,23 +63,23 @@
         <table class="layui-hide" id="currentTableId" id="currentTableFilter" lay-filter="currentTableFilter"></table>
 
         <script id="currentTableBar" type="text/html">
-            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
             <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
         </script>
 
     </div>
 </div>
 <script charset="utf-8" src="../static/layuiadmin/layui/layui.js"></script>
+<script src="../static/js/jquery-3.6.0.min.js"></script>
 <script>
     layui.use(['form', 'table'], function () {
         let $ = layui.jquery,
             form = layui.form,
             table = layui.table;
 
-
+        let classId = $("#classId").val(); //获取隐藏域中的值
         table.render({
             elem: '#currentTableId',
-            url: '../CounselorServlet?action=getClassUser',  //!!!!表格数据接口
+            url: '../CounselorServlet?action=getClassUser&classId=' + classId,  //!!!!表格数据接口
             toolbar: '#toolbarDemo',
             /*defaultToolbar: ['filter', 'exports', 'print', {
               title: '提示',
@@ -77,18 +89,17 @@
             //!!!!表头
             cols: [[
                 {type: "checkbox", width: 50},
-                {field: 'userId', width: 200, title: '学号', sort: true},
-                {field: 'userName', width: 200, title: '用户名', edit: 'text'},
-                {field: 'sex', width: 200, title: '性别', edit: 'text'},
-                {field: 'age', width: 200, title: '年龄', edit: 'text', sort: true},
-                {field: 'password', width: 200, title: '密码', edit: 'text'},
+                {field: 'userId', width: 200, title: '学号', sort: true, event: 'userId'},
+                {field: 'userName', width: 200, title: '用户名', edit: 'text', event: 'userName', sort: true},
+                {field: 'sex', width: 200, title: '性别', edit: 'text', event: 'sex'},
+                {field: 'age', width: 200, title: '年龄', edit: 'text', event: 'age', sort: true},
+                {field: 'password', width: 200, title: '密码', edit: 'text', event: 'password'},
                 {title: '操作', Width: 200, toolbar: '#currentTableBar'}
             ]],
             /*id:'userInfo', //执行表格重载时使用*/
-            /*
-            limits: [10, 15, 20, 25, 50, 100], //每页显示条数
-            limit: 15,    //每页条数的选择项*/
-            page: false /*true*/, //开启分页
+            /* limits: [10, 15, 20, 25, 50, 100], //每页显示条数*/
+            /* limit: 10,    //每页条数的选择项*/
+            page: false/*true*/, //开启分页
             /*skin: 'line'*/
         });
 
@@ -97,26 +108,39 @@
          *！！！！搜索事件
          */
         form.on('submit(data-search-btn)', function (data) {
-            let target = data.field;
-            $.getJSON("../CounselorServlet?action=searchUser", target, function (data) {
-                console.log("搜索完成");
-                //表格重载
-                table.reload('currentTableId', {
-                    url: '../CounselorServlet?action=getClassUser' //数据接口
-                    , where: {} //设定异步数据接口的额外参数
-                    //,height: 300
+            let target = data.field;  //搜索框内容
+            let userId = target.userId;
+            let userName = target.userName;
+
+            let reg = /^[0-9]*$/;
+            if (!reg.test(userId)) {
+                layer.msg("学号应为十位纯数字");
+            } else {
+                console.log(target);
+                console.log(classId);
+                $.getJSON("../CounselorServlet?action=searchUser&classId=" + classId, target, function (data) {
+                    console.log("搜索完成");
+                    console.log(data);
+                    //表格重载
+                    table.reload('currentTableId', {
+                        url: '../CounselorServlet?action=searchUser&classId='
+                            + classId + "&userId=" + userId + "&userName=" + userName
+                        //数据接口
+                        , where: {} //设定异步数据接口的额外参数
+                        //,height: 300
+                    });
+                    layer.msg("已搜索出" + data.data.length + "个用户");
+                    /*//执行搜索重载
+                    table.reload('currentTableId', {
+                      page: {
+                        curr: 1
+                      }
+                      , where: {
+                        searchParams: result
+                      }
+                    }, 'data');*/
                 });
-                layer.msg("已搜索出" + data.result + "个用户");
-                /*//执行搜索重载
-                table.reload('currentTableId', {
-                  page: {
-                    curr: 1
-                  }
-                  , where: {
-                    searchParams: result
-                  }
-                }, 'data');*/
-            });
+            }
             return false;
         });
 
@@ -174,29 +198,14 @@
             console.log(obj.data)
         });
 
+
         /**
-         * 表格末尾编辑和删除事件监听
+         * 表格末尾删除事件监听
          */
         table.on('tool(currentTableFilter)', function (obj) {
             let data = obj.data;
-            //编辑用户事件
-            if (obj.event === 'edit') {
-                let index = layer.open({
-                    title: '编辑用户',
-                    type: 2,
-                    shade: 0.2,
-                    /*maxmin:true,*/
-                    shadeClose: true,
-                    area: ['100%', '100%'],
-                    content: '../page/table/edit.html',
-                });
-                $(window).on("resize", function () {
-                    layer.full(index);
-                });
-                return false;
-            }
             /*！！删除事件!!!!*/
-            else if (obj.event === 'delete') {
+            if (obj.event === 'delete') {
                 console.log("删除事件触发");
                 layer.confirm('真的删除行么', function (index) {
                     let userId = data.userId;
@@ -217,23 +226,69 @@
             }
         });
 
-        /**
-         *
-         * ！！！！监听单元格编辑
-         */
-        table.on('edit(currentTableFilter)', function (obj) {
-            console.log("单元编辑事件触发");
-            let value = obj.value //得到修改后的值
-                , data = obj.data //得到所在行所有键值
-                , field = obj.field; //得到字段
-            $.getJSON("../CounselorServlet?action=upDateTable&field=" + field + "&value=" + value + "&userId=" + data.userId, function (data) {
-                layer.msg("修改成功");
-            });
 
-            /*layer.msg('[ID: '+ data.id +'] ' + field + ' 字段更改为：'+ value, {
-              offset: '15px'
-            });*/
+        /**监听单元格数据事件**/
+        table.on('tool(currentTableFilter)', function (obj) {
+            let data = obj.data;
+            console.log(data[obj.event]);
+            console.log(obj.event);
+            let oldData = data[obj.event];   //获取单元格的值
+            /**
+             * ！！！！监听单元格编辑
+             */
+            table.on('edit(currentTableFilter)', function (obj) {
+                console.log("单元编辑事件触发");
+                let value = obj.value //得到修改后的值
+                    , data = obj.data //得到所在行所有键值
+                    , field = obj.field; //得到字段
+                console.log(field);
+                let bl = true;
+                /**判断修改是否符合规范**/
+                if (field === "userName") {
+                    let reg = /^[\u4e00-\u9fa5]{2,4}$/;
+                    if (!reg.test(value)) {
+                        layer.msg("名字只能是2~4个中文");
+                        bl = false;
+                    }
+                }
+                if (field === "password") {
+                    console.log(value);
+                    let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\\W]{6,18}$/;//6——18英语数组组合
+                    if (!reg.test(value)) {
+                        layer.msg("密码必须为6~18位数字和字母的组合");
+                        bl = false;
+                    }
+                }
+
+                if (field === "sex") {
+                    console.log(value);
+                    let reg = /[/^男$|^女&/]/;//6——18英语数组组合
+                    if (!reg.test(value)) {
+                        layer.msg("性别只能为[男]或[女]");
+                        bl = false;
+                    }
+                }
+
+                if (field === "age") {
+                    console.log(value);
+                    let reg = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;//6-120
+                    if (!reg.test(value)) {
+                        layer.msg("年龄介于0~120");
+                        bl = false;
+                    }
+                }
+
+                if (bl) {
+                    $.getJSON("../CounselorServlet?action=upDateTable&field=" + field + "&value=" + value + "&userId=" + data.userId, function (data) {
+                        layer.msg("修改成功");
+                    });
+                }
+            });
+            obj.update({
+                userName: oldData
+            })
         });
+
 
     });
 </script>

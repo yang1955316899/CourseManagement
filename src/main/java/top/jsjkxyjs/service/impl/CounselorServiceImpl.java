@@ -3,6 +3,7 @@ package top.jsjkxyjs.service.impl;
 import top.jsjkxyjs.dao.CounselorDao;
 import top.jsjkxyjs.dao.impl.CounselorDaoImpl;
 import top.jsjkxyjs.entity.Class;
+import top.jsjkxyjs.entity.StudentGrade;
 import top.jsjkxyjs.entity.User;
 import top.jsjkxyjs.service.CounselorService;
 
@@ -85,9 +86,22 @@ public class CounselorServiceImpl implements CounselorService {
      * @return 结果
      */
     @Override
-    public int doSearch(int userId, String userName) {
+    public List<User> doSearch(int userId, String userName, int classId) {
         CounselorDao dao = new CounselorDaoImpl();
-        return dao.searchUser(userId, userName);
+        return dao.searchUser(userId, userName, classId);
     }
 
+
+    /**
+     * 获取班级学生每门课的成绩
+     *
+     * @param classId 班级编号
+     * @return 成绩列表
+     */
+    @Override
+    public List<StudentGrade> doGetGradeByClass(int classId) {
+
+        return null;
+    }
 }
+

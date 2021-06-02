@@ -24,20 +24,23 @@ public class CounselorServlet extends BaseServlet {
 	 */
 	public void getClassUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("getClassUser方法被访问了");
-		int classId = 1;/*Integer.parseInt(req.getParameter("classId"));*/
-		CounselorService service = new CounselorServiceImpl();
-		List<User> list = service.doGetClassUser(classId);
-		System.out.println("用户列表查询完成");
-		//将list存入map中
-		Map<String, Object> myMap = new HashMap<>();
-		myMap.put("code", 0);
-		myMap.put("msg", "");
-		myMap.put("count", 35);
-		myMap.put("limit", 10);
-		myMap.put("data", list);
-		Gson gson = new Gson();
-		String jsonListString = gson.toJson(myMap);
-		resp.getWriter().write(jsonListString);
+		String classId = req.getParameter("classId");
+		if (classId != null && !"".equals(classId)) {
+			int id = Integer.parseInt(classId);
+			CounselorService service = new CounselorServiceImpl();
+			List<User> list = service.doGetClassUser(id);
+			System.out.println("用户列表查询完成");
+			//将list存入map中
+			Map<String, Object> myMap = new HashMap<>();
+			myMap.put("code", 0);
+			myMap.put("data", list);
+			Gson gson = new Gson();
+			String jsonListString = gson.toJson(myMap);
+			resp.getWriter().write(jsonListString);
+		} else {
+			System.out.println("用户列表查询失败，该用户不是辅导员");
+		}
+
 	}
 
 
@@ -133,21 +136,27 @@ public class CounselorServlet extends BaseServlet {
 		System.out.println("search方法被调用");
 		String userId = req.getParameter("userId");
 		int id = 0;
-		if (userId == null) {
-			id = 0;
-		} else {
+		if (userId != null && !"".equals(userId)) {
 			id = Integer.parseInt(userId);
 		}
 		String userName = req.getParameter("userName");
 		if (userName == null) {
 			userName = "";
 		}
+		int classId = Integer.parseInt(req.getParameter("classId"));
 		CounselorService service = new CounselorServiceImpl();
-		int i = service.doSearch(id, userName);
-		Map<String, Integer> map = new HashMap<>();
-		map.put("result", i);
+		List<User> list = service.doSearch(id, userName, classId);
+		System.out.println("搜索完成");
+		//将list存入map中
+		Map<String, Object> myMap = new HashMap<>();
+		myMap.put("code", 0);
+		myMap.put("data", list);
 		Gson gson = new Gson();
-		String gsonStr = gson.toJson(map);
-		resp.getWriter().write(gsonStr);
+		String jsonListString = gson.toJson(myMap);
+		resp.getWriter().write(jsonListString);
+	}
+
+	public void getClassGrades(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 	}
 }

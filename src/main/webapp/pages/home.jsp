@@ -111,7 +111,6 @@
                     %>
                     <dl data-name="home" class="layui-nav-item layui-nav-itemed">
                         <a  lay-href="javascript:;" lay-tips="主页" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
                             <cite><%=action1.getTitle()%></cite>
                         </a>
                         <dd class="layui-nav-child">
