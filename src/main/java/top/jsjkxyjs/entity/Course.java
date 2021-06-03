@@ -4,31 +4,14 @@ public class Course {
 	int id;
 	String CourseName;
 	int Teacher;
-	int Location;
+	int Room;
 	int MaxSize;
-	int YearSemester;
+	String YearSemester;
 	int Week;
-	int ClassCode;
-	float Creadit;
-	int Assistant;
+	String ClassCode;
+	float Credit;
 	String Desc;
 	int Choose;
-
-	public int getChoose() {
-		return Choose;
-	}
-
-	public void setChoose(int choose) {
-		Choose = choose;
-	}
-
-	public String getDesc() {
-		return Desc;
-	}
-
-	public void setDesc(String desc) {
-		Desc = desc;
-	}
 
 	public int getId() {
 		return id;
@@ -54,12 +37,20 @@ public class Course {
 		Teacher = teacher;
 	}
 
-	public int getLocation() {
-		return Location;
+	public Course(String courseName, int teacher, int room, int maxSize, String yearSemester, int week, String classCode, float credit, String desc, int choose) {
+		CourseName = courseName;
+		Teacher = teacher;
+		Room = room;
+		MaxSize = maxSize;
+		YearSemester = yearSemester;
+		Week = week;
+		ClassCode = classCode;
+		Credit = credit;
+		Desc = desc;
+		Choose = choose;
 	}
 
-	public void setLocation(int location) {
-		Location = location;
+	public Course() {
 	}
 
 	public int getMaxSize() {
@@ -70,43 +61,59 @@ public class Course {
 		MaxSize = maxSize;
 	}
 
-	public int getYearSemester() {
-		return YearSemester;
+	public int getRoom() {
+		return Room;
 	}
 
-	public void setYearSemester(int yearSemester) {
-		YearSemester = yearSemester;
+	public void setRoom(int room) {
+		Room = room;
 	}
 
 	public int getWeek() {
 		return Week;
 	}
 
-	public void setDay(int week) {
+	public String getYearSemester() {
+		return YearSemester;
+	}
+
+	public void setYearSemester(String yearSemester) {
+		YearSemester = yearSemester;
+	}
+
+	public void setWeek(int week) {
 		Week = week;
 	}
 
-	public int getClassCode() {
+	public String getClassCode() {
 		return ClassCode;
 	}
 
-	public void setClassCode(int classCode) {
+	public void setClassCode(String classCode) {
 		ClassCode = classCode;
 	}
 
-	public float getCreadit() {
-		return Creadit;
+	public float getCredit() {
+		return Credit;
 	}
 
-	public void setCreadit(float creadit) {
-		Creadit = creadit;
+	public void setCredit(float credit) {
+		Credit = credit;
 	}
 
-	public int getAssistant() {
-		return Assistant;
+	public String getDesc() {
+		return Desc;
 	}
 
-	public void setAssistant(int assistant) {
-		Assistant = assistant;
+	public void setDesc(String desc) {
+		Desc = desc;
+	}
+
+	public int getChoose() {
+		return Choose;
+	}
+
+	public void setChoose(int choose) {
+		Choose = choose;
 	}
 }

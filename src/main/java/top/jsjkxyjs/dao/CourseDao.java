@@ -28,4 +28,6 @@ public interface CourseDao {
 	List<String> getStudentIdsByClassId(int classId);
 
 	List<String> getClassIdsByCounselorId(int CounselorId);
+
+	boolean setCourse(Course course);
 }

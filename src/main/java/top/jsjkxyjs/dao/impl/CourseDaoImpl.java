@@ -22,13 +22,12 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
 				course.setId(rs.getInt("id"));
 				course.setCourseName(rs.getString("CourseName"));
 				course.setTeacher(rs.getInt("Teacher"));
-				course.setLocation(rs.getInt("Location"));
+				course.setRoom(rs.getInt("Location"));
 				course.setMaxSize(rs.getInt("MaxSize"));
-				course.setYearSemester(rs.getInt("YearSemester"));
-				course.setDay(rs.getInt("Day"));
-				course.setClassCode(rs.getInt("ClassCode"));
-				course.setCreadit(rs.getFloat("Creadit"));
-				course.setAssistant(rs.getInt("Assistant"));
+				course.setYearSemester(rs.getString("YearSemester"));
+				course.setWeek(rs.getInt("Day"));
+				course.setClassCode(rs.getString("ClassCode"));
+				course.setCredit(rs.getFloat("Credit"));
 				course.setDesc(rs.getString("Desc"));
 				course.setChoose(rs.getInt("Choose"));
 				courses.add(course);
@@ -79,5 +78,11 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
 	public List<String> getClassIdsByCounselorId(int CounselorId) {
 		String sql = "select id from t_class where Counselor = ?";
 		return getStrings(sql, CounselorId, "id");
+	}
+
+	@Override
+	public boolean setCourse(Course course) {
+		String sql = "insert into t_course (CourseName,Teacher,Location,MaxSize,YearSemester,Week,ClassCode,Credit,Introduction,Choose)values(?,?,?,?,?,?,?,?,?,?)";
+		return excuteSQL(sql, new String[]{course.getCourseName(), course.getTeacher() + "", course.getRoom() + "", course.getMaxSize() + "", course.getYearSemester(), course.getWeek() + "", course.getClassCode(), course.getCredit() + "", course.getDesc(), course.getChoose() + ""}) > 0;
 	}
 }
