@@ -1,5 +1,6 @@
 package top.jsjkxyjs.service.impl;
 
+import top.jsjkxyjs.dao.impl.TeacherDaoImpl;
 import top.jsjkxyjs.service.TeacherService;
 import top.jsjkxyjs.util.Helper;
 
@@ -14,5 +15,10 @@ public class TeacherServiceImpl implements TeacherService {
 	@Override
 	public boolean checkRoomUse(List<String> list, int[] classCode) {
 		return new Helper().timeAdd(list, classCode);
+	}
+
+	@Override
+	public List<String> getTimeByTeacherId(String TeacherId, String Year, String Semester, String Week) {
+		return new TeacherDaoImpl().getTimeByTeacherId(TeacherId, Year, Semester, Week);
 	}
 }

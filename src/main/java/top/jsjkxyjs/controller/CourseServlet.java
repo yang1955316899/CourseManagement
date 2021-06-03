@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import top.jsjkxyjs.entity.Course;
 import top.jsjkxyjs.service.impl.CourseServiceImpl;
 import top.jsjkxyjs.service.impl.LocationServiceImpl;
+import top.jsjkxyjs.service.impl.TeacherServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ public class CourseServlet extends BaseServlet {
 		resp.getWriter().write(new Gson().toJson(new LocationServiceImpl().getRoomUseByTime(Integer.parseInt(req.getParameter("RoomId")),
 				Integer.parseInt(req.getParameter("Year")),
 				Integer.parseInt(req.getParameter("Semester")),
-				Integer.parseInt(req.getParameter("Day")))));
+				Integer.parseInt(req.getParameter("Week")))));
 	}
 
 	public String[] getLayUICheckBoxValue(HttpServletRequest req, HttpServletResponse resp, String[] arrs) {
@@ -52,12 +53,17 @@ public class CourseServlet extends BaseServlet {
 				Integer.parseInt(req.getParameter("room")),
 				Integer.parseInt(req.getParameter("MaxSize")),
 				req.getParameter("Year") + req.getParameter("Semester"),
-				Integer.parseInt(req.getParameter("Day")),
+				Integer.parseInt(req.getParameter("Week")),
 				classCode,
 				Float.parseFloat(req.getParameter("Credit")),
-				req.getParameter("desc"),
+				req.getParameter("Introduction"),
 				req.getParameter("Choose") != null ? 1 : 0
 		);
 		resp.getWriter().write(new Gson().toJson(new CourseServiceImpl().setCourse(course)));
+	}
+
+	public void getTimeByTeacherId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new TeacherServiceImpl().getTimeByTeacherId(req.getParameter("TeacherId")
+				, req.getParameter("Year"), req.getParameter("Semester"), req.getParameter("Week"))));
 	}
 }

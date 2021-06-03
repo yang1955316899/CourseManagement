@@ -1,5 +1,7 @@
 package top.jsjkxyjs.dao;
 
-public interface TeacherDao {
+import java.util.List;
 
+public interface TeacherDao {
+	List<String> getTimeByTeacherId(String TeacherId, String Year, String Semester, String Week);
 }

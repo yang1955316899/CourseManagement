@@ -10,7 +10,7 @@ public class Course {
 	int Week;
 	String ClassCode;
 	float Credit;
-	String Desc;
+	String Introduction;
 	int Choose;
 
 	public int getId() {
@@ -37,7 +37,7 @@ public class Course {
 		Teacher = teacher;
 	}
 
-	public Course(String courseName, int teacher, int room, int maxSize, String yearSemester, int week, String classCode, float credit, String desc, int choose) {
+	public Course(String courseName, int teacher, int room, int maxSize, String yearSemester, int week, String classCode, float credit, String introduction, int choose) {
 		CourseName = courseName;
 		Teacher = teacher;
 		Room = room;
@@ -46,7 +46,7 @@ public class Course {
 		Week = week;
 		ClassCode = classCode;
 		Credit = credit;
-		Desc = desc;
+		Introduction = introduction;
 		Choose = choose;
 	}
 
@@ -101,12 +101,12 @@ public class Course {
 		Credit = credit;
 	}
 
-	public String getDesc() {
-		return Desc;
+	public String getIntroduction() {
+		return Introduction;
 	}
 
-	public void setDesc(String desc) {
-		Desc = desc;
+	public void setIntroduction(String introduction) {
+		Introduction = introduction;
 	}
 
 	public int getChoose() {

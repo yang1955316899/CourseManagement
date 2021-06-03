@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang="en">
 
 <head>
@@ -15,7 +15,7 @@
     <div class="layui-row">
         <div class="layui-col-xs8 layui-col-sm8 layui-col-md8">
             <form action="" class="layui-form" lay-filter="form">
-                <input name="Teacher" type="hidden" value=${sessionScope.user.userId}>
+                <input name="Teacher" type="hidden" id="Teacher" value=${sessionScope.user.userId}>
                 <div class="layui-form-item">
                     <label class="layui-form-label">课程名称</label>
                     <div class="layui-input-block">
@@ -63,7 +63,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">星期</label>
                             <div class="layui-input-block">
-                                <select id="Day" lay-filter="Day" lay-search lay-verify="required" name="Day">
+                                <select id="Week" lay-filter="Week" lay-search lay-verify="required" name="Week">
                                     <option selected="selected" value="">请选择</option>
                                     <option value="1">星期一</option>
                                     <option value="2">星期二</option>
@@ -115,7 +115,7 @@
                 <div class="layui-form-item layui-form-text">
                     <label class="layui-form-label">课程简介</label>
                     <div class="layui-input-block">
-                            <textarea class="layui-textarea" name="desc"
+                            <textarea class="layui-textarea" name="Introduction"
                                       placeholder="课程简介,请输入少于500字的文字简介"></textarea>
                     </div>
                 </div>
@@ -213,9 +213,9 @@
                     check();
                 })
 
-                var DayTemp = -1;
-                form.on("select(Day)", function (day) {
-                    DayTemp = day.value;
+                var WeekTemp = -1;
+                form.on("select(Week)", function (Week) {
+                    WeekTemp = Week.value;
                     check();
                 })
                 var SemesterTemp = 1;
@@ -224,7 +224,9 @@
                     check();
                 })
 
-                var arrstem = [];
+                var arrstemRoom = [];
+                var arrstemTeacher = [];
+                var TeacherTimeTemp = [];
 
                 //检测房间容量
                 function check() {
@@ -232,21 +234,41 @@
                         if (MaxSizeTemp < $('#MaxSize').val()) {
                             alert("注意:房间最大容量一定要大于课程最大人数,当前房间最大容量为:" + MaxSizeTemp);
                         }
-                    if (document.querySelector("#Year").value.length > 0 && RoomId !== -1 && SemesterTemp > 0 && DayTemp > 0) {
-                        if (arrstem[0] != document.querySelector("#Year").value || arrstem[1] != RoomId || arrstem[2] != SemesterTemp || arrstem[3] != DayTemp) {
-                            arrstem[0] = document.querySelector("#Year").value;
-                            arrstem[1] = RoomId;
-                            arrstem[2] = SemesterTemp;
-                            arrstem[3] = DayTemp;
+
+                    if (document.querySelector("#Year").value.length > 0 && RoomId !== -1 && SemesterTemp > 0 && WeekTemp > 0) {
+                        if (arrstemRoom[0] != document.querySelector("#Year").value || arrstemRoom[1] != RoomId || arrstemRoom[2] != SemesterTemp || arrstemRoom[3] != WeekTemp) {
+                            arrstemRoom[0] = document.querySelector("#Year").value;
+                            arrstemRoom[1] = RoomId;
+                            arrstemRoom[2] = SemesterTemp;
+                            arrstemRoom[3] = WeekTemp;
+
+                            if (document.querySelector('#Year').value.length > 0 && SemesterTemp > 0 && WeekTemp > 0) {
+                                if (arrstemTeacher[0] != document.querySelector('#Year').value.length || arrstemTeacher[1] != SemesterTemp || arrstemTeacher[2] != WeekTemp) {
+                                    arrstemTeacher[0] = document.querySelector('#Year').value.length;
+                                    arrstemTeacher[1] = SemesterTemp;
+                                    arrstemTeacher[2] = WeekTemp;
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "../Course?action=getTimeByTeacherId",
+                                        dataType: "JSON",
+                                        async: true,
+                                        data: "TeacherId=" + $('#Teacher').val() + "&Year=" + document.querySelector('#Year').value + "&Semester=" + SemesterTemp + "&Week=" + WeekTemp,
+                                        success: function (result) {
+                                            TeacherTimeTemp = result;
+                                        }
+                                    })
+                                }
+                            }
                             $.ajax({
                                 type: "POST",
                                 url: "../Course?action=getRoomUseByTime",
                                 dataType: "JSON",
                                 async: true,
-                                data: "RoomId=" + RoomId + "&Year=" + document.querySelector("#Year").value + "&Semester=" + SemesterTemp + "&Day=" + DayTemp,
+                                data: "RoomId=" + RoomId + "&Year=" + document.querySelector("#Year").value + "&Semester=" + SemesterTemp + "&Week=" + WeekTemp,
 
                                 success: function (result) {
                                     var list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+                                    result = TeacherTimeTemp.concat(result);
                                     if (result.length !== 0) {
                                         for (var index = 0; index < result.length; index++) {
                                             for (var char = 0; char < 14; char++) {
