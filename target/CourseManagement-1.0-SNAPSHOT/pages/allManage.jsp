@@ -110,11 +110,11 @@
                 {type: "checkbox", width: 50},
                 {field: 'userId', width: 150, title: '教职工号', sort: true, event: 'userId'},
                 {field: 'userName', width: 150, title: '用户名', edit: 'text', event: 'userName', sort: true},
-                {field: 'sex', width: 150, title: '性别', edit: 'text', event: 'sex',templet:'#sexId'},
+                {field: 'sex', width: 150, title: '性别', edit: 'text', event: 'sex', templet: '#sexId'},
                 {field: 'age', width: 150, title: '年龄', edit: 'text', event: 'age', sort: true},
-                {field: 'roleId', width: 150, title: '角色', edit: 'text', event: 'role',templet: '#role',sort:true},
+                {field: 'roleId', width: 150, title: '角色', edit: 'text', event: 'role', templet: '#role', sort: true},
                 {field: 'password', width: 150, title: '密码', edit: 'text', event: 'password'},
-                {field: 'classId',width: 150,title: '班级',event: 'text',sort: true},
+                {field: 'classId', width: 150, title: '班级', event: 'text', sort: true},
                 {title: '操作', Width: 1500, toolbar: '#currentTableBar'}
             ]],
             page: false/*true*/, //开启分页
@@ -248,13 +248,13 @@
 
             /*修改性别*/
             if (field === "sex") {
-                if (value==="男"){
-                    value=1;
-                }else if (value==="女"){
-                    value=0;
-                }else {
+                if (value === "男") {
+                    value = 1;
+                } else if (value === "女") {
+                    value = 0;
+                } else {
                     layer.msg("性别只能是[男]或[女]")
-                    bl=false;
+                    bl = false;
                 }
             }
 
@@ -270,7 +270,7 @@
             if (bl) {
                 $.getJSON("../CounselorServlet?action=upDateTable&field=" + field + "&value=" + value + "&userId=" + data.userId, function (data) {
                     layer.msg("修改成功");
-                    if (field==="sex") {
+                    if (field === "sex") {
                         obj.update({
                             sex: value
                         })

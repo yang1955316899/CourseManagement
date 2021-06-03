@@ -7,7 +7,7 @@ public class Course {
 	int Location;
 	int MaxSize;
 	int YearSemester;
-	int Day;
+	int Week;
 	int ClassCode;
 	float Creadit;
 	int Assistant;
@@ -78,12 +78,12 @@ public class Course {
 		YearSemester = yearSemester;
 	}
 
-	public int getDay() {
-		return Day;
+	public int getWeek() {
+		return Week;
 	}
 
-	public void setDay(int day) {
-		Day = day;
+	public void setDay(int week) {
+		Week = week;
 	}
 
 	public int getClassCode() {
