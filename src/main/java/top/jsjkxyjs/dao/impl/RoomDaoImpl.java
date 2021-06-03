@@ -66,7 +66,7 @@ public class RoomDaoImpl extends BaseDao implements RoomDao {
 
 	@Override
 	public List<String> getRoomUseByTime(int locationId, int year, int semester, int day) {
-		String sql = "select ClassCode from t_course where Location = ? && YearSemester = ? && Day = ?";
+		String sql = "select ClassCode from t_course where Location = ? && YearSemester = ? && Week = ?";
 		String[] args = new String[]{"" + locationId, "" + year + semester, "" + day};
 		return getStrings(sql, args, "ClassCode");
 	}
