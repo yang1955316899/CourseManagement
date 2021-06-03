@@ -68,6 +68,17 @@
 
     </div>
 </div>
+
+<script type="text/html" id="sexId">
+    {{# if(d.sex=== 0) { }}
+    女
+    {{# } else if(d.sex=== 1) { }}
+    男
+    {{# } else { }}
+    未知
+    {{# } }}
+</script>
+
 <script charset="utf-8" src="../static/layuiadmin/layui/layui.js"></script>
 <script src="../static/js/jquery-3.6.0.min.js"></script>
 <script>
@@ -91,16 +102,12 @@
                 {type: "checkbox", width: 50},
                 {field: 'userId', width: 200, title: '学号', sort: true, event: 'userId'},
                 {field: 'userName', width: 200, title: '用户名', edit: 'text', event: 'userName', sort: true},
-                {field: 'sex', width: 200, title: '性别', edit: 'text', event: 'sex'},
+                {field: 'sex', width: 200, title: '性别', edit: 'text', event: 'sex', templet: '#sexId'},
                 {field: 'age', width: 200, title: '年龄', edit: 'text', event: 'age', sort: true},
                 {field: 'password', width: 200, title: '密码', edit: 'text', event: 'password'},
                 {title: '操作', Width: 200, toolbar: '#currentTableBar'}
             ]],
-            /*id:'userInfo', //执行表格重载时使用*/
-            /* limits: [10, 15, 20, 25, 50, 100], //每页显示条数*/
-            /* limit: 10,    //每页条数的选择项*/
             page: false/*true*/, //开启分页
-            /*skin: 'line'*/
         });
 
 
@@ -130,15 +137,6 @@
                         //,height: 300
                     });
                     layer.msg("已搜索出" + data.data.length + "个用户");
-                    /*//执行搜索重载
-                    table.reload('currentTableId', {
-                      page: {
-                        curr: 1
-                      }
-                      , where: {
-                        searchParams: result
-                      }
-                    }, 'data');*/
                 });
             }
             return false;
@@ -204,6 +202,7 @@
          */
         table.on('tool(currentTableFilter)', function (obj) {
             let data = obj.data;
+            console.log(data);
             /*！！删除事件!!!!*/
             if (obj.event === 'delete') {
                 console.log("删除事件触发");
@@ -226,13 +225,6 @@
             }
         });
 
-
-        /**监听单元格数据事件**/
-        table.on('tool(currentTableFilter)', function (obj) {
-            let data = obj.data;
-            console.log(data[obj.event]);
-            console.log(obj.event);
-            let oldData = data[obj.event];   //获取单元格的值
             /**
              * ！！！！监听单元格编辑
              */
@@ -244,6 +236,7 @@
                 console.log(field);
                 let bl = true;
                 /**判断修改是否符合规范**/
+                /*修改姓名*/
                 if (field === "userName") {
                     let reg = /^[\u4e00-\u9fa5]{2,4}$/;
                     if (!reg.test(value)) {
@@ -251,6 +244,7 @@
                         bl = false;
                     }
                 }
+                /*修改密码*/
                 if (field === "password") {
                     console.log(value);
                     let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z\\W]{6,18}$/;//6——18英语数组组合
@@ -259,16 +253,18 @@
                         bl = false;
                     }
                 }
-
+                /*修改性别*/
                 if (field === "sex") {
-                    console.log(value);
-                    let reg = /[/^男$|^女&/]/;//6——18英语数组组合
-                    if (!reg.test(value)) {
-                        layer.msg("性别只能为[男]或[女]");
+                    if (value === "男") {
+                        value = 1;
+                    } else if (value === "女") {
+                        value = 0;
+                    } else {
+                        layer.msg("性别只能是[男]或[女]")
                         bl = false;
                     }
                 }
-
+                /*修改年龄*/
                 if (field === "age") {
                     console.log(value);
                     let reg = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/;//6-120
@@ -277,19 +273,19 @@
                         bl = false;
                     }
                 }
-
+                /*发送ajas请求*/
                 if (bl) {
                     $.getJSON("../CounselorServlet?action=upDateTable&field=" + field + "&value=" + value + "&userId=" + data.userId, function (data) {
                         layer.msg("修改成功");
+                        if (field === "sex") {
+                            obj.update({
+                                sex: value
+                            })
+                        }
+
                     });
                 }
             });
-            obj.update({
-                userName: oldData
-            })
-        });
-
-
     });
 </script>
 

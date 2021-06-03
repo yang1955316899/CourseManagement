@@ -31,5 +31,14 @@
         <url-pattern>/CounselorServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SuperManageServlet</servlet-name>
+        <servlet-class>top.jsjkxyjs.controller.SuperManageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SuperManageServlet</servlet-name>
+        <url-pattern>/SuperManageServlet</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

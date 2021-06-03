@@ -194,11 +194,11 @@ public class CounselorDaoImpl extends BaseDao implements CounselorDao {
         conn = getConnection();
         String sql;
         if (userId != 0 && !userName.equals("")) {
-            sql = "select * from t_user where userId = ? and userName=? and classId=? and roleId=4";
+            sql = "select * from t_user where userId = ? and userName=? and classId=? and roleId=4 and state=1";
         } else if (userId == 0 && "".equals(userName)) {
-            sql = "select * from t_user where (userId = ? or userName=? or classId = ?) and roleId=4";
+            sql = "select * from t_user where (userId = ? or userName=? or classId = ?) and roleId=4 and state=1";
         } else {
-            sql = "select * from t_user where (userId = ? or userName=?) and classId=? and roleId=4";
+            sql = "select * from t_user where (userId = ? or userName=?) and classId=? and roleId=4 and state=1";
         }
 
         try {
