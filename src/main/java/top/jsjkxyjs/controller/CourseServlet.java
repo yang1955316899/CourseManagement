@@ -66,4 +66,8 @@ public class CourseServlet extends BaseServlet {
 		resp.getWriter().write(new Gson().toJson(new TeacherServiceImpl().getTimeByTeacherId(req.getParameter("TeacherId")
 				, req.getParameter("Year"), req.getParameter("Semester"), req.getParameter("Week"))));
 	}
+
+	public void getAllChooseCourses(HttpServletRequest req, HttpServletResponse resp) {
+
+	}
 }
