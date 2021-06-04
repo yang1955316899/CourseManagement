@@ -2,6 +2,7 @@ package top.jsjkxyjs.dao;
 
 import top.jsjkxyjs.entity.Course;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface CourseDao {
@@ -30,4 +31,12 @@ public interface CourseDao {
 	List<String> getClassIdsByCounselorId(int CounselorId);
 
 	boolean setCourse(Course course);
+
+	List<Course> getChooseCourses() throws SQLException;
+
+	String getLocationPIDString(int LocationId);
+
+	String getTeacherNameByTeacherId(int TeacherId);
+
+	String getLocationTitle(String LocationId);
 }

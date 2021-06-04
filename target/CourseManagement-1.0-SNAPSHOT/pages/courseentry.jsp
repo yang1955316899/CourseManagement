@@ -204,81 +204,81 @@
                     }
                 });
 
-                //检测键盘弹起事件
-                window.addEventListener('keyup', function () {
-                    //对人数进行正则替换
-                    document.querySelector("#MaxSize").value = document.querySelector("#MaxSize").value.replace(/\D/g, '');
-                    //对学分进行正则替换
-                    document.querySelector("#Credit").value = document.querySelector("#Credit").value.replace(/\D/g, '');
-                    check();
-                })
+            //检测键盘弹起事件
+            window.addEventListener('keyup', function () {
+                //对人数进行正则替换
+                document.querySelector("#MaxSize").value = document.querySelector("#MaxSize").value.replace(/\D/g, '');
+                //对学分进行正则替换
+                document.querySelector("#Credit").value = document.querySelector("#Credit").value.replace(/\D/g, '');
+                check();
+            })
 
-                var WeekTemp = -1;
-                form.on("select(Week)", function (Week) {
-                    WeekTemp = Week.value;
-                    check();
-                })
-                var SemesterTemp = 1;
-                form.on("select(Semester)", function (semester) {
-                    SemesterTemp = semester.value;
-                    check();
-                })
+            var WeekTemp = -1;
+            form.on("select(Week)", function (Week) {
+                WeekTemp = Week.value;
+                check();
+            })
+            var SemesterTemp = 1;
+            form.on("select(Semester)", function (semester) {
+                SemesterTemp = semester.value;
+                check();
+            })
 
-                var arrstemRoom = [];
-                var arrstemTeacher = [];
-                var TeacherTimeTemp = [];
+            var arrstemRoom = [];
+            var arrstemTeacher = [];
+            var TeacherTimeTemp = [];
 
-                //检测房间容量
-                function check() {
-                    if (MaxSizeTemp !== -1 && document.querySelector('#MaxSize').value.length > 0)
-                        if (MaxSizeTemp < $('#MaxSize').val()) {
-                            alert("注意:房间最大容量一定要大于课程最大人数,当前房间最大容量为:" + MaxSizeTemp);
-                        }
+            //检测房间容量
+            function check() {
+                if (MaxSizeTemp !== -1 && document.querySelector('#MaxSize').value.length > 0)
+                    if (MaxSizeTemp < $('#MaxSize').val()) {
+                        alert("注意:房间最大容量一定要大于课程最大人数,当前房间最大容量为:" + MaxSizeTemp);
+                    }
 
-                    if (document.querySelector("#Year").value.length > 0 && RoomId !== -1 && SemesterTemp > 0 && WeekTemp > 0) {
-                        if (arrstemRoom[0] != document.querySelector("#Year").value || arrstemRoom[1] != RoomId || arrstemRoom[2] != SemesterTemp || arrstemRoom[3] != WeekTemp) {
-                            arrstemRoom[0] = document.querySelector("#Year").value;
-                            arrstemRoom[1] = RoomId;
-                            arrstemRoom[2] = SemesterTemp;
-                            arrstemRoom[3] = WeekTemp;
+                if (document.querySelector("#Year").value.length > 0 && RoomId !== -1 && SemesterTemp > 0 && WeekTemp > 0) {
+                    if (arrstemRoom[0] != document.querySelector("#Year").value || arrstemRoom[1] != RoomId || arrstemRoom[2] != SemesterTemp || arrstemRoom[3] != WeekTemp) {
+                        arrstemRoom[0] = document.querySelector("#Year").value;
+                        arrstemRoom[1] = RoomId;
+                        arrstemRoom[2] = SemesterTemp;
+                        arrstemRoom[3] = WeekTemp;
 
-                            if (document.querySelector('#Year').value.length > 0 && SemesterTemp > 0 && WeekTemp > 0) {
-                                if (arrstemTeacher[0] != document.querySelector('#Year').value.length || arrstemTeacher[1] != SemesterTemp || arrstemTeacher[2] != WeekTemp) {
-                                    arrstemTeacher[0] = document.querySelector('#Year').value.length;
-                                    arrstemTeacher[1] = SemesterTemp;
-                                    arrstemTeacher[2] = WeekTemp;
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "../Course?action=getTimeByTeacherId",
-                                        dataType: "JSON",
-                                        async: true,
-                                        data: "TeacherId=" + $('#Teacher').val() + "&Year=" + document.querySelector('#Year').value + "&Semester=" + SemesterTemp + "&Week=" + WeekTemp,
-                                        success: function (result) {
-                                            TeacherTimeTemp = result;
-                                        }
-                                    })
-                                }
+                        if (document.querySelector('#Year').value.length > 0 && SemesterTemp > 0 && WeekTemp > 0) {
+                            if (arrstemTeacher[0] != document.querySelector('#Year').value.length || arrstemTeacher[1] != SemesterTemp || arrstemTeacher[2] != WeekTemp) {
+                                arrstemTeacher[0] = document.querySelector('#Year').value.length;
+                                arrstemTeacher[1] = SemesterTemp;
+                                arrstemTeacher[2] = WeekTemp;
+                                $.ajax({
+                                    type: "POST",
+                                    url: "../Course?action=getTimeByTeacherId",
+                                    dataType: "JSON",
+                                    async: true,
+                                    data: "TeacherId=" + $('#Teacher').val() + "&Year=" + document.querySelector('#Year').value + "&Semester=" + SemesterTemp + "&Week=" + WeekTemp,
+                                    success: function (result) {
+                                        TeacherTimeTemp = result;
+                                    }
+                                })
                             }
-                            $.ajax({
-                                type: "POST",
-                                url: "../Course?action=getRoomUseByTime",
-                                dataType: "JSON",
-                                async: true,
-                                data: "RoomId=" + RoomId + "&Year=" + document.querySelector("#Year").value + "&Semester=" + SemesterTemp + "&Week=" + WeekTemp,
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "../Course?action=getRoomUseByTime",
+                            dataType: "JSON",
+                            async: true,
+                            data: "RoomId=" + RoomId + "&Year=" + document.querySelector("#Year").value + "&Semester=" + SemesterTemp + "&Week=" + WeekTemp,
 
-                                success: function (result) {
-                                    var list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
-                                    result = TeacherTimeTemp.concat(result);
-                                    if (result.length !== 0) {
-                                        for (var index = 0; index < result.length; index++) {
-                                            for (var char = 0; char < 14; char++) {
-                                                if (result[index][char] == "0")
-                                                    list[char] = 0;
-                                            }
+                            success: function (result) {
+                                var list = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+                                result = TeacherTimeTemp.concat(result);
+                                if (result.length !== 0) {
+                                    for (var index = 0; index < result.length; index++) {
+                                        for (var char = 0; char < 14; char++) {
+                                            if (result[index][char] == "0")
+                                                list[char] = 0;
                                         }
-                                        for (var index = 0; index <= 12; index++) {
-                                            if (list[index] !== 0) list[index] = 1;
-                                        }
+                                    }
+                                    for (var index = 0; index <= 12; index++) {
+                                        if (list[index] !== 0) list[index] = 1;
+                                    }
                                     } else {
                                         var list = [];
                                         for (var index = 0; index <= 12; index++) {
