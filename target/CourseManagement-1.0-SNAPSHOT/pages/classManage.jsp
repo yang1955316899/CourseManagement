@@ -178,7 +178,7 @@
                     console.log(data.result);
                     table.reload('currentTableId', {
                         /***!!!!!!!数据表格的重载!!!!!！****/
-                        url: '../CounselorServlet?action=getClassUser' //数据接口
+                        url: '../CounselorServlet?action=getClassUser&classId='+classId //数据接口
                         , where: {} //设定异步数据接口的额外参数
                         //,height: 300
                     });

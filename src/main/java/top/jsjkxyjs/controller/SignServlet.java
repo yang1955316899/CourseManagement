@@ -2,6 +2,7 @@ package top.jsjkxyjs.controller;
 
 import top.jsjkxyjs.entity.Action;
 import top.jsjkxyjs.entity.Class;
+import top.jsjkxyjs.entity.StudentGrade;
 import top.jsjkxyjs.entity.User;
 import top.jsjkxyjs.service.ActionService;
 import top.jsjkxyjs.service.CounselorService;
@@ -18,11 +19,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class SignServlet extends BaseServlet {
-
-	public void test(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("test方法被访问了");
-	}
-
 	/**
 	 * 登录的方法
 	 */
@@ -46,7 +42,6 @@ public class SignServlet extends BaseServlet {
 			//通过 userId获取user对象的全部信息
 			user = signService.doGetInfo(userId);
 			System.out.println(user.getUserName() + "登录成功");
-
 			//通过roleId获取相应的actionId
 			String actionId = signService.doGetActionId(roleId);
 
@@ -59,10 +54,12 @@ public class SignServlet extends BaseServlet {
 
 			//装箱并请求转发
 			HttpSession session = req.getSession();
-			//如果用户带有班级，则获取所带的班级id
+			//如果用户带有班级，则获取所带的班级id 和学生成绩信息
 			if (roleId == 3 || roleId == 5) {
 				CounselorService service = new CounselorServiceImpl();
 				Class myClass = service.doGetClass(userId);
+				List<StudentGrade> gradeList = service.doGetGradeByClass(myClass.getId());
+				session.setAttribute("gradesList", gradeList);
 				session.setAttribute("myClass", myClass);
 			}
 			session.setAttribute("user", user);

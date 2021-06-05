@@ -1,22 +1,41 @@
 package top.jsjkxyjs.entity;
 
 public class User {
-	private int id;
-	private int userId;
-	private int roleId;
-	private String userName;
-	private String password;
-	private int sex;
-	private int classId;
-	private int age;
+    private int id;
+    private int userId;
+    private int roleId;
+    private String userName;
+    private String password;
+    private int sex;
+    private int classId;
+    private String className;
+    private int age;
+    private String roleName;
 
-	public int getAge() {
-		return age;
-	}
+    public String getRoleName() {
+        return roleName;
+    }
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
 	public int getClassId() {
 		return classId;

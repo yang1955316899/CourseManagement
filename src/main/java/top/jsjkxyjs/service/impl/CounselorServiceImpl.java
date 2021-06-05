@@ -3,10 +3,12 @@ package top.jsjkxyjs.service.impl;
 import top.jsjkxyjs.dao.CounselorDao;
 import top.jsjkxyjs.dao.impl.CounselorDaoImpl;
 import top.jsjkxyjs.entity.Class;
+import top.jsjkxyjs.entity.SC;
 import top.jsjkxyjs.entity.StudentGrade;
 import top.jsjkxyjs.entity.User;
 import top.jsjkxyjs.service.CounselorService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CounselorServiceImpl implements CounselorService {
@@ -100,8 +102,34 @@ public class CounselorServiceImpl implements CounselorService {
      */
     @Override
     public List<StudentGrade> doGetGradeByClass(int classId) {
+        List<StudentGrade> gradeList = new ArrayList<>();
+        CounselorDao dao = new CounselorDaoImpl();
+        //获取班级所有学生信息,包含userId和userName
+        List<User> userList = dao.getClassUser(classId);
+        //对所有学生依次获取其课程成绩
+        for (int i = 0; i < userList.size(); i++) {
+            //通过userId获取grade和courseId
+            List<SC> scList = dao.getScByUserId(userList.get(i).getUserId());
+            //通过courseId获取courseName
+            List<String> courseNameList = new ArrayList<>();
+            for (int j = 0; j < scList.size(); i++) {
+                courseNameList.add(dao.getCourseNameById(scList.get(j).getCourseId()));
+            }
+            StudentGrade grade = new StudentGrade();
+            grade.setStudentId(userList.get(i).getUserId());
+            grade.setStudentName(userList.get(i).getUserName());
 
-        return null;
+            for (int j = 0; j < scList.size(); j++) {
+                StudentGrade.course course = grade.new course();
+                course.setCourseName(courseNameList.get(j));
+                course.setGrade(scList.get(i).getGrade());
+                grade.courseList.add(course);
+            }
+            grade.setStudentId(userList.get(i).getUserId());
+            grade.setStudentName(userList.get(i).getUserName());
+            gradeList.add(grade);
+        }
+        return gradeList;
     }
 }
 

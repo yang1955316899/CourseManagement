@@ -2,7 +2,7 @@ package top.jsjkxyjs.dao.impl;
 
 import top.jsjkxyjs.dao.CounselorDao;
 import top.jsjkxyjs.entity.Class;
-import top.jsjkxyjs.entity.StudentGrade;
+import top.jsjkxyjs.entity.SC;
 import top.jsjkxyjs.entity.User;
 
 import java.util.ArrayList;
@@ -227,15 +227,56 @@ public class CounselorDaoImpl extends BaseDao implements CounselorDao {
     }
 
     /**
-     * 获取班级学生的成绩信息
+     * 获取对应学生的课程SC
      *
-     * @param classId 班级号
-     * @return 学生成绩列表
+     * @param userId userId
+     * @return 成绩集合
      */
     @Override
-    public List<StudentGrade> getGradesByClass(int classId) {
-        List<StudentGrade> list = new ArrayList<>();
+    public List<SC> getScByUserId(int userId) {
+        List<SC> list = new ArrayList<>();
         conn = getConnection();
+        String sql = "select courseId,grade from t_sc,t_user where userId=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            while (rs.next()) {
+                SC sc = new SC();
+                sc.setCourseId(rs.getInt("courseId"));
+                sc.setGrade(rs.getInt("grade"));
+                list.add(sc);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, ps, conn);
+        }
         return list;
+    }
+
+    /**
+     * 获取课程名称
+     *
+     * @param courseId 课程id
+     * @return 课程名称
+     */
+    @Override
+    public String getCourseNameById(int courseId) {
+        String courseName = "";
+        conn = getConnection();
+        String sql = "select courseName from t_course where id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, courseId);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                courseName = rs.getString("courseName");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, ps, conn);
+        }
+        return courseName;
     }
 }
