@@ -15,8 +15,12 @@ import java.util.Map;
 
 /**
  * 超级管理员
+ *
+ * @author SeRein
  */
 public class SuperManageServlet extends BaseServlet {
+
+
     /**
      * 获取所有用户的所有信息
      *
@@ -39,6 +43,15 @@ public class SuperManageServlet extends BaseServlet {
         resp.getWriter().write(jsonListString);
     }
 
+
+    /**
+     * 超级管理员搜索
+     *
+     * @param req  请求
+     * @param resp 响应
+     * @throws ServletException servlet异常
+     * @throws IOException      IO异常
+     */
     public void superSearch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("superSearch方法被调用了");
         String userId = req.getParameter("userId");
@@ -61,4 +74,36 @@ public class SuperManageServlet extends BaseServlet {
         String jsonListString = gson.toJson(myMap);
         resp.getWriter().write(jsonListString);
     }
-}
+
+
+    /**
+     * 超级管理员添加用户
+     *
+     * @param req  请求
+     * @param resp 响应
+     * @throws ServletException servlet异常
+     * @throws IOException      IO异常
+     */
+    public void superAdd(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        SuperAdministratorService service = new SuperAdministratorServiceImpl();
+        String calssName = req.getParameter("className");
+        if (calssName == null) {
+            System.out.println("className为空");
+        }
+        int classId = service.doGetClassIdByClassName(req.getParameter("className"));
+        User user = new User();
+        user.setUserId(Integer.parseInt(req.getParameter("userId")));
+        user.setRoleId(Integer.parseInt(req.getParameter("roleId")));
+        user.setAge(Integer.parseInt(req.getParameter("age")));
+        user.setSex(Integer.parseInt(req.getParameter("sex")));
+        user.setClassId(classId);
+        user.setUserName(req.getParameter("userName"));
+        user.setPassword(req.getParameter("password"));
+
+        int i = service.doSuperAdd(user);
+        Map<String, Integer> map = new HashMap<>();
+        map.put("result", i);
+        Gson gson = new Gson();
+        String gsonStr = gson.toJson(map);
+        resp.getWriter().write(gsonStr);
+    }}

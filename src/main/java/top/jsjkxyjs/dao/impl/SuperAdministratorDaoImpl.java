@@ -53,7 +53,7 @@ public class SuperAdministratorDaoImpl extends BaseDao implements SuperAdministr
         List<User> list = new ArrayList<>();
         conn = getConnection();
         String sql;
-        if (userId != 0 && !userName.equals("")) {
+        if (userId != 0 && !"".equals(userName)) {
             sql = "select * from t_user where (userId = ? and userName = ?) and state=1";
         } else if (userId == 0 && "".equals(userName)) {
             sql = "select * from t_user where (userId = ? or userName = ? ) or  state=1";
@@ -84,5 +84,62 @@ public class SuperAdministratorDaoImpl extends BaseDao implements SuperAdministr
             closeAll(rs, ps, conn);
         }
         return list;
+    }
+
+    /**
+     * 管理员添加用户
+     *
+     * @param user user
+     * @return 结果信息
+     */
+    @Override
+    public int superAddUser(User user) {
+        int i = 0;
+        conn = getConnection();
+        String sql = "insert into t_user (userId,userName,password,age,sex,roleId,classId) values(?,?,?,?,?,?,?)";
+
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, user.getUserId());
+            ps.setString(2, user.getUserName());
+            ps.setString(3, user.getPassword());
+            ps.setInt(4, user.getAge());
+            ps.setInt(5, user.getSex());
+            ps.setInt(6, user.getRoleId());
+            ps.setInt(7, user.getClassId());
+            i = ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, ps, conn);
+        }
+        return i;
+    }
+
+    /**
+     * 根据班级name获取班级id
+     *
+     * @param className 班级名字
+     * @return 班级id
+     */
+    @Override
+    public int getClassIdByClassName(String className) {
+        int classId = 0;
+        conn = getConnection();
+        String sql = "select id from t_class where className=?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, className);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                classId = rs.getInt("id");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, ps, conn);
+        }
+
+        return classId;
     }
 }

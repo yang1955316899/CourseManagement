@@ -156,7 +156,7 @@
                     type: 2,
                     shade: 0.2,
                     shadeClose: true,
-                    area: ['40%', '70%'],//宽:高
+                    area: ['40%', '85%'],//宽:高
                     content: 'superAdd.jsp',
                 });
                 $(window).on("resize", function () {

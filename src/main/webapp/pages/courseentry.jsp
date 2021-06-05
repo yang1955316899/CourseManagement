@@ -273,33 +273,33 @@
                                 if (result.length !== 0) {
                                     for (var index = 0; index < result.length; index++) {
                                         for (var char = 0; char < 14; char++) {
-                                            if (result[index][char] == "0")
+                                            if (result[index][char] === "0")
                                                 list[char] = 0;
                                         }
                                     }
                                     for (var index = 0; index <= 12; index++) {
                                         if (list[index] !== 0) list[index] = 1;
                                     }
-                                    } else {
-                                        var list = [];
-                                        for (var index = 0; index <= 12; index++) {
-                                            list[index] = 1;
-                                        }
+                                } else {
+                                    var list = [];
+                                    for (var index = 0; index <= 12; index++) {
+                                        list[index] = 1;
                                     }
-                                    $('#classCode').empty();
-                                    var flag = 0;
-                                    for (var index = 1; index <= 12; index++) {
-                                        if (list[index] == 1) {
-                                            flag = 1;
-                                            $('#classCode').append("<input name=" + index + " title=" + index + " type=\"checkbox\">");
-                                        }
-                                    }
-                                    if (flag == 0)
-                                        $('#classCode').append("<input disabled=\"disabled\" title=\"暂无可用教室!\" type=\"checkbox\">");
-                                    form.render('checkbox');
-                                    console.log(list);
                                 }
-                            })
+                                $('#classCode').empty();
+                                var flag = 0;
+                                for (var index = 1; index <= 12; index++) {
+                                    if (list[index] === 1) {
+                                        flag = 1;
+                                        $('#classCode').append("<input name=" + index + " title=" + index + " type=\"checkbox\">");
+                                    }
+                                }
+                                if (flag == 0)
+                                    $('#classCode').append("<input disabled=\"disabled\" title=\"暂无可用教室!\" type=\"checkbox\">");
+                                form.render('checkbox');
+                                console.log(list);
+                            }
+                        })
                         }
 
                     }

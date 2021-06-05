@@ -7,6 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -18,47 +19,44 @@
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>班级学生信息查看</legend>
+    <legend>班级成绩</legend>
 </fieldset>
 
 <div class="layui-form">
     <table class="layui-table">
-        <%--表头--%>
         <thead>
-        <tr style="background-color: #01AAED">
-            <th>2019014102</th>
-            <th>杨戬问</th>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <c:forEach begin="1" end="${sessionScope.gradesList.size()}" var="i">
+                <th>课程名${i}</th>
+                <th>成绩</th>
+            </c:forEach>
         </tr>
-        <tr style="background-color: #2E2D3C">
-            <th>课程id</th>
-            <th>课程名</th>
-            <th>授课教师</th>
-            <th>成绩</th>
-            <th>学分</th>
-        </tr>
-
         </thead>
-        <%--表格内容--%>
         <tbody>
-        <c:forEach begin="1" end="10" var="i">
+        <c:forEach begin="1" end="${sessionScope.gradesList.size()}" var="i">
             <tr>
-                <th>110</th>
-                <th>java面向对象程序设设计</th>
-                <th>彭伟</th>
-                <th>90</th>
-                <th>3.5</th>
+                <td>201901410${i}</td>
+                <td>张三${i}号</td>
+                <c:forEach begin="1" end="10" var="i">
+                    <td>课程${i}</td>
+                    <td>${i*20}</td>
+                </c:forEach>
             </tr>
         </c:forEach>
 
         </tbody>
     </table>
 </div>
+</table>
+
 
 <script src="../static/layuiadmin/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
 <script>
 
 </script>
 
 </body>
 </html>
-
