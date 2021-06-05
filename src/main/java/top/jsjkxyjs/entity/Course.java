@@ -4,7 +4,10 @@ public class Course {
 	int id;
 	String CourseName;
 	int Teacher;
+	String TeacherName;
 	int Room;
+	String Location;
+	String RoomName;
 	int MaxSize;
 	String YearSemester;
 	int Week;
@@ -12,6 +15,39 @@ public class Course {
 	float Credit;
 	String Introduction;
 	int Choose;
+
+	public Course(int id, String courseName, int teacher, String teacherName, int room, String location, String roomName, int maxSize, String yearSemester, int week, String classCode, float credit, String introduction, int choose) {
+		this.id = id;
+		CourseName = courseName;
+		Teacher = teacher;
+		TeacherName = teacherName;
+		Room = room;
+		Location = location;
+		RoomName = roomName;
+		MaxSize = maxSize;
+		YearSemester = yearSemester;
+		Week = week;
+		ClassCode = classCode;
+		Credit = credit;
+		Introduction = introduction;
+		Choose = choose;
+	}
+
+	public Course() {
+	}
+
+	public Course(String courseName, int teacher, int room, int maxSize, String yearSemester, int week, String classCode, float credit, String introduction, int choose) {
+		CourseName = courseName;
+		Teacher = teacher;
+		Room = room;
+		MaxSize = maxSize;
+		YearSemester = yearSemester;
+		Week = week;
+		ClassCode = classCode;
+		Credit = credit;
+		Introduction = introduction;
+		Choose = choose;
+	}
 
 	public int getId() {
 		return id;
@@ -37,28 +73,12 @@ public class Course {
 		Teacher = teacher;
 	}
 
-	public Course(String courseName, int teacher, int room, int maxSize, String yearSemester, int week, String classCode, float credit, String introduction, int choose) {
-		CourseName = courseName;
-		Teacher = teacher;
-		Room = room;
-		MaxSize = maxSize;
-		YearSemester = yearSemester;
-		Week = week;
-		ClassCode = classCode;
-		Credit = credit;
-		Introduction = introduction;
-		Choose = choose;
+	public String getTeacherName() {
+		return TeacherName;
 	}
 
-	public Course() {
-	}
-
-	public int getMaxSize() {
-		return MaxSize;
-	}
-
-	public void setMaxSize(int maxSize) {
-		MaxSize = maxSize;
+	public void setTeacherName(String teacherName) {
+		TeacherName = teacherName;
 	}
 
 	public int getRoom() {
@@ -69,8 +89,28 @@ public class Course {
 		Room = room;
 	}
 
-	public int getWeek() {
-		return Week;
+	public String getLocation() {
+		return Location;
+	}
+
+	public void setLocation(String location) {
+		Location = location;
+	}
+
+	public String getRoomName() {
+		return RoomName;
+	}
+
+	public void setRoomName(String roomName) {
+		RoomName = roomName;
+	}
+
+	public int getMaxSize() {
+		return MaxSize;
+	}
+
+	public void setMaxSize(int maxSize) {
+		MaxSize = maxSize;
 	}
 
 	public String getYearSemester() {
@@ -79,6 +119,10 @@ public class Course {
 
 	public void setYearSemester(String yearSemester) {
 		YearSemester = yearSemester;
+	}
+
+	public int getWeek() {
+		return Week;
 	}
 
 	public void setWeek(int week) {
