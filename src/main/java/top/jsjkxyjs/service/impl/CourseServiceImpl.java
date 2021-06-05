@@ -4,6 +4,7 @@ import top.jsjkxyjs.dao.impl.CourseDaoImpl;
 import top.jsjkxyjs.entity.Course;
 import top.jsjkxyjs.service.CourseService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseServiceImpl implements CourseService {
@@ -18,7 +19,15 @@ public class CourseServiceImpl implements CourseService {
 
 	@Override
 	public List<Course> getChooseCourses(int UserId) {
-		return new CourseDaoImpl().getChooseCourses();
+		List<Course> chooseCourse = new ArrayList<>();
+		List<Course> AllChooseCourse = new CourseDaoImpl().getChooseCourses();
+		for (Course course : AllChooseCourse) {
+			if (Check(UserId, course.getId(), Integer.parseInt(course.getYearSemester()), course.getWeek()))
+				chooseCourse.add(course);
+		}
+		return chooseCourse;
+
+
 	}
 
 	@Override

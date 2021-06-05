@@ -15,7 +15,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../static/layuiadmin/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="../static/layuiadmin/layui/css/layui.css" media="all">
 </head>
 <body>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
@@ -28,14 +28,14 @@
         <tr>
             <th>学号</th>
             <th>姓名</th>
-            <c:forEach begin="1" end="10" var="i">
+            <c:forEach begin="1" end="${sessionScope.gradesList.size()}" var="i">
                 <th>课程名${i}</th>
                 <th>成绩</th>
             </c:forEach>
         </tr>
         </thead>
         <tbody>
-        <c:forEach begin="1" end="10" var="i">
+        <c:forEach begin="1" end="${sessionScope.gradesList.size()}" var="i">
             <tr>
                 <td>201901410${i}</td>
                 <td>张三${i}号</td>

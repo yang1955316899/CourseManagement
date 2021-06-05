@@ -77,7 +77,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">班级(不是学生则填无)</label>
                 <div class="layui-input-block">
-                    <input type="text" name="className" autocomplete="off" placeholder="请输入所属班级";
+                    <input type="text" name="className" autocomplete="off" placeholder="请输入所属班级" ;
                            class="layui-input">
                 </div>
             </div>
@@ -134,7 +134,7 @@
                 success: function (data) {
                     console.log("添加成功");
                     alert("用户添加成功")
-                    },
+                },
                 error: function () {
                     console.log("回调失败");
                 }
