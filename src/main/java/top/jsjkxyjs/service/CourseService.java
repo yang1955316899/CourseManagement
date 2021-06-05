@@ -9,5 +9,11 @@ public interface CourseService {
 
 	List<Course> getChooseCourses(int UserId);
 
-	List<Course> Check(int Id, List<Course> courses);
+	String getCourseTimeByCourseId(int CourseId);
+
+	boolean Check(int UserId, int Id, int YearSemester, int Week);
+
+	boolean setChooseCourse(int UserId, int CourseId, int YearSemester, int Week);
+
+	List<String> getClassCodeByTime(int UserId, int YearSemester, int Week);
 }

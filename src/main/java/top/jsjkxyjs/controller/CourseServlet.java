@@ -77,4 +77,9 @@ public class CourseServlet extends BaseServlet {
 		String jsonListString = gson.toJson(Data);
 		resp.getWriter().write(jsonListString);
 	}
+
+	public void setChooseCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new CourseServiceImpl().setChooseCourse(Integer.parseInt(req.getParameter("UserId")), Integer.parseInt(req.getParameter("CourseId")), Integer.
+				parseInt(req.getParameter("YearSemester")), Integer.parseInt(req.getParameter("Week")))));
+	}
 }

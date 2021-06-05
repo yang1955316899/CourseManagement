@@ -85,7 +85,7 @@ public class BaseDao {
 		conn = getConnection();
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, "" + arg);
+			ps.setInt(1, arg);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				list.add(rs.getString(returnType));

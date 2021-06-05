@@ -12,14 +12,6 @@
 </head>
 <body>
 
-<div class="layui-card layadmin-header">
-    <div class="layui-breadcrumb" lay-filter="breadcrumb">
-        <a lay-href="">主页</a>
-        <a><cite>组件</cite></a>
-        <a><cite>数据表格</cite></a>
-        <a><cite>数据操作</cite></a>
-    </div>
-</div>
 
 <div class="layui-fluid">
     <div class="layui-row layui-col-space15">
@@ -27,12 +19,10 @@
             <div class="layui-card">
                 <div class="layui-card-header">数据操作</div>
                 <div class="layui-card-body">
-                    <input type="hidden" name="UserId" id="UserId" value=${sessionScope.user.userId}>
-                    <table class="layui-hide" id="test-table-operate" lay-filter="test-table-operate"></table>
-                    <script id="test-table-operate-barDemo" type="text/html">
-                        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    <input type="hidden" name="UserId" id="userId" value=${sessionScope.user.userId}>
+                    <table class="layui-hide" id="Course" lay-filter="Course"></table>
+                    <script id="Choose" type="text/html">
+                        <a class="layui-btn layui-btn-primary" lay-event="Choose">选择</a>
                     </script>
                 </div>
             </div>
@@ -80,62 +70,46 @@
             , admin = layui.admin;
 
         table.render({
-            elem: '#test-table-operate'
-            , url: '../Course?action=getAllChooseCourses&UserId=' + document.querySelector('#UserId').value
-            , cols: [[
-                {field: 'CourseName', width: 180, title: '课程名', sort: true}
-                , {field: 'TeacherName', width: 80, title: '教师', sort: true}
-                , {field: 'MaxSize', width: 110, title: '人数限制', sort: true}
-                , {field: 'RoomName', width: 150, title: '地点'}
-                , {field: 'Week', width: 100, title: '星期', templet: '#Week', sort: true}
+            elem: '#Course'
+            , url: '../Course?action=getAllChooseCourses&UserId=' + $('#userId').val()
+            , size: 'lg'
+            , cols: [[{field: 'id', hide: true}
+                , {field: 'CourseName', minWidth: 180, title: '课程名', sort: true}
+                , {field: 'TeacherName', minWidth: 80, title: '教师', sort: true}
+                , {field: 'MaxSize', minWidth: 110, title: '人数限制', sort: true}
+                , {field: 'RoomName', minWidth: 150, title: '地点'}
+                , {field: 'Week', minWidth: 100, title: '星期', templet: '#Week', sort: true}
                 , {field: 'ClassCode', title: '上课时间', templet: '#ClassCode'}
-                , {field: 'Introduction', title: '简介', minWidth: 100}
+                , {field: 'Credit', title: '学分', minWidth: 50}
+                , {field: 'Introduction', title: '简介', Width: 300},
+                , {fixed: 'right', title: '操作', toolbar: '#Choose', width: 90}
             ]]
             , page: true
             , limit: 1
         });
 
-        //监听表格复选框选择
-        table.on('checkbox(test-table-operate)', function (obj) {
-            console.log(obj)
-        });
         //监听工具条
-        table.on('tool(test-table-operate)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'detail') {
-                layer.msg('ID：' + data.id + ' 的查看操作');
-            } else if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
+        table.on('tool(Course)', function (obj) {
+            var data = obj.data.id;
+            console.log(data)
+            if (obj.event === 'Choose') {
+                layer.confirm('确认选择这门课嘛?', function (index) {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "../Course?action=setChooseCourse",
+                        data: "UserId=" + $('#userId').val() + "&CourseId=" + data + "&YearSemester=" + obj.data.YearSemester + "&Week=" + obj.data.Week,
+                        success: function (result) {
+                            if (result)
+                                layer.msg("选课成功!");
+                            else
+                                layer.msg("选课失败!");
+                        }
+                    })
                     layer.close(index);
                 });
-            } else if (obj.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
             }
         });
-
-        var $ = layui.$, active = {
-            getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('test-table-operate')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            , getCheckLength: function () { //获取选中数目
-                var checkStatus = table.checkStatus('test-table-operate')
-                    , data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
-            }
-            , isAll: function () { //验证是否全选
-                var checkStatus = table.checkStatus('test-table-operate');
-                layer.msg(checkStatus.isAll ? '全选' : '未全选')
-            }
-        };
-
-        $('.test-table-operate-btn .layui-btn').on('click', function () {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-
     });
 </script>
 </body>

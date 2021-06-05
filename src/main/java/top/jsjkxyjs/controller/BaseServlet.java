@@ -25,7 +25,6 @@ public class BaseServlet extends HttpServlet {
 			method.invoke(this, req, resp);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 	}
 }
