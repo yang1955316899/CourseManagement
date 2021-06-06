@@ -20,7 +20,6 @@
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-
         <fieldset class="table-search-fieldset">
             <legend>搜索学生</legend>
             <div style="margin: 10px 10px 10px 10px">

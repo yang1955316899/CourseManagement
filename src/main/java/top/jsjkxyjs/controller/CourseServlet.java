@@ -70,4 +70,6 @@ public class CourseServlet extends BaseServlet {
 	public void getAllChooseCourses(HttpServletRequest req, HttpServletResponse resp) {
 
 	}
+
+
 }
