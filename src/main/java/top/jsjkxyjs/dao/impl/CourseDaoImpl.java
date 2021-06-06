@@ -21,16 +21,16 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
 	}
 
 	public String YearSemester() {
-		Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
 
-		int year = cal.get(Calendar.YEAR);
-		int month = cal.get(Calendar.MONTH) + 1;
-		String currXueqi = year + "1";
-		if (month > 8 || month < 2) {
-			currXueqi = year + "2";
-		}
-		return currXueqi;
-	}
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        String currSemester = year + "1";
+        if (month > 8 || month < 2) {
+            currSemester = year + "2";
+        }
+        return currSemester;
+    }
 
 	@Override
 	public List<Course> getChooseCourses() {
@@ -45,21 +45,21 @@ public class CourseDaoImpl extends BaseDao implements CourseDao {
 				course.setId(rs.getInt("id"));
 				course.setCourseName(rs.getString("CourseName"));
 				course.setTeacher(rs.getInt("Teacher"));
-				course.setRoom(rs.getInt("Location"));
-				course.setMaxSize(rs.getInt("MaxSize"));
-				course.setYearSemester(rs.getString("YearSemester"));
-				course.setWeek(rs.getInt("Week"));
-				course.setClassCode(rs.getString("ClassCode"));
-				course.setCredit(rs.getInt("Credit"));
-				course.setIntroduction(rs.getString("Introduction"));
-				course.setChoose(rs.getInt("Choose"));
-				list.add(course);
-			}
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} finally {
-			closeAll(rs, ps, conn);
-		}
+                course.setRoom(rs.getInt("Location"));
+                course.setMaxSize(rs.getInt("MaxSize"));
+                course.setYearSemester(rs.getString("YearSemester"));
+                course.setWeek(rs.getInt("Week"));
+                course.setClassCode(rs.getString("ClassCode"));
+                course.setCredit(rs.getInt("Credit"));
+                course.setIntroduction(rs.getString("Introduction"));
+                course.setChoose(rs.getInt("Choose"));
+                list.add(course);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeAll(rs, ps, conn);
+        }
 		for (Course course : list) {
 			String LocationName = getLocationTitle(getLocationPIDString(course.getRoom()));
 			String RoomName = getLocationTitle("" + course.getRoom());

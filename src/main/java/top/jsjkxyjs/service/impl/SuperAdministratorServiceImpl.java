@@ -7,12 +7,12 @@ import top.jsjkxyjs.service.SuperAdministratorService;
 
 import java.util.List;
 
+/**
+ * 获取所有用户信息
+ *
+ * @author 李镇宇
+ */
 public class SuperAdministratorServiceImpl implements SuperAdministratorService {
-    /**
-     * 获取所有用户信息
-     *
-     * @return 信息集合
-     */
     @Override
     public List<User> doGetAllUser() {
         SuperAdministratorDao dao = new SuperAdministratorDaoImpl();
@@ -21,7 +21,6 @@ public class SuperAdministratorServiceImpl implements SuperAdministratorService 
 
     /**
      * 搜索用户
-     *
      * @param userId   用户Id
      * @param userName 用户name
      * @return list集合
@@ -29,8 +28,7 @@ public class SuperAdministratorServiceImpl implements SuperAdministratorService 
     @Override
     public List<User> doSuperSearch(int userId, String userName) {
         SuperAdministratorDao dao = new SuperAdministratorDaoImpl();
-        List<User> list = dao.superSearch(userId, userName);
-        return list;
+        return dao.superSearch(userId, userName);
     }
 
     /**
@@ -47,7 +45,6 @@ public class SuperAdministratorServiceImpl implements SuperAdministratorService 
 
     /**
      * 根据classname获取classId
-     *
      * @param className 班级名称
      * @return 班级id
      */

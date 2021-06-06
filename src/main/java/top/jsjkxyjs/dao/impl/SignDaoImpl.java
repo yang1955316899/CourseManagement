@@ -4,19 +4,13 @@ package top.jsjkxyjs.dao.impl;
 import top.jsjkxyjs.dao.SignDao;
 import top.jsjkxyjs.entity.User;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SignDaoImpl extends BaseDao implements SignDao {
 
-	/**
-	 * 通过用户名密码，获取用户roleId，如果不存在则roleId为0
-	 *
-	 * @param user
-	 * @return
-	 */
+
 	@Override
 	public int getRoleId(User user) {
 		conn = getConnection();
@@ -39,7 +33,7 @@ public class SignDaoImpl extends BaseDao implements SignDao {
 	}
 
 	@Override
-	public void signOut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/index.html");
-    }
+	public void signOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.sendRedirect("/index.html");
+	}
 }
