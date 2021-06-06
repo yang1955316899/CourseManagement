@@ -11,7 +11,7 @@ public interface CourseService {
 
 	String getCourseTimeByCourseId(int CourseId);
 
-	boolean check(int UserId, int Id, int YearSemester, int Week);
+	boolean Check(int UserId, int CourseId, int YearSemester, int Week);
 
 	boolean setChooseCourse(int UserId, int CourseId, int YearSemester, int Week);
 
