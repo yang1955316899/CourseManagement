@@ -2,7 +2,6 @@ package top.jsjkxyjs.controller;
 
 import top.jsjkxyjs.entity.Action;
 import top.jsjkxyjs.entity.Class;
-import top.jsjkxyjs.entity.StudentGrade;
 import top.jsjkxyjs.entity.User;
 import top.jsjkxyjs.service.ActionService;
 import top.jsjkxyjs.service.CounselorService;
@@ -58,8 +57,8 @@ public class SignServlet extends BaseServlet {
 			if (roleId == 3 || roleId == 5) {
 				CounselorService service = new CounselorServiceImpl();
 				Class myClass = service.doGetClass(userId);
-				List<StudentGrade> gradeList = service.doGetGradeByClass(myClass.getId());
-				session.setAttribute("gradesList", gradeList);
+				/*List<User> gradeList = service.doGetGradeByClass(myClass.getId());
+				session.setAttribute("gradesList", gradeList);*/
 				session.setAttribute("myClass", myClass);
 			}
 			session.setAttribute("user", user);

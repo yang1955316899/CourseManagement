@@ -236,10 +236,11 @@ public class CounselorDaoImpl extends BaseDao implements CounselorDao {
     public List<SC> getScByUserId(int userId) {
         List<SC> list = new ArrayList<>();
         conn = getConnection();
-        String sql = "select courseId,grade from t_sc,t_user where userId=?";
+        String sql = "select t_user.userName,courseId,grade from t_sc,t_user where t_user.userId = t_sc.studentId and userId=?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userId);
+            rs = ps.executeQuery();
             while (rs.next()) {
                 SC sc = new SC();
                 sc.setCourseId(rs.getInt("courseId"));
