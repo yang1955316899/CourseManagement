@@ -82,4 +82,6 @@ public class CourseServlet extends BaseServlet {
 		resp.getWriter().write(new Gson().toJson(new CourseServiceImpl().setChooseCourse(Integer.parseInt(req.getParameter("UserId")), Integer.parseInt(req.getParameter("CourseId")), Integer.
 				parseInt(req.getParameter("YearSemester")), Integer.parseInt(req.getParameter("Week")))));
 	}
+
+
 }

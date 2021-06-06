@@ -39,6 +39,14 @@
         <servlet-name>SuperManageServlet</servlet-name>
         <url-pattern>/SuperManageServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>TeacherServlet</servlet-name>
+        <servlet-class>top.jsjkxyjs.controller.TeacherServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TeacherServlet</servlet-name>
+        <url-pattern>/Teacher</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>PersonalServlet</servlet-name>
