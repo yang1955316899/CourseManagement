@@ -1,24 +1,7 @@
 package top.jsjkxyjs.util;
 
-import java.util.List;
-
 public class Helper {
-	public boolean timeAdd(List<String> list, int[] classCode) {
-		int[] classCodeTemp = new int[13];
-		for (String tem : list) {
-			char[] temArr = tem.toCharArray();
-			for (int index = 0; index < temArr.length; index++) {
-				classCodeTemp[temArr[index] - '0']++;
-			}
-		}
 
-		for (int flag : classCode)
-			for (int index = 0; index < classCodeTemp.length; index++)
-				if (flag == index && classCodeTemp[index] > 0) {
-					return false;
-				}
-		return true;
-	}
 
 	public int[] parse(String str) {
 		int length = str.length();

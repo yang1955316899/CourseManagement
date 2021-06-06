@@ -133,26 +133,27 @@
         layui.use(['layer', 'form'], function () {
                 var layer = layui.layer
                     , form = layui.form;
-                form.on('submit(submit)', function (data) {
+            form.on('submit(submit)', function (data) {
 
-                    console.log(data.field);
-                    //表单提交
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        url: "../Course?action=setCourse",
-                        data: data.field,
-                        success: function (result) {
-                            layer.msg(result);
-                        }
-                    })
-                    return false;
-                });
-                $(document).ready(function () {
-                    //获取所有楼id
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
+                console.log(data.field);
+                //表单提交
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "../Course?action=setCourse",
+                    data: data.field,
+                    success: function (result) {
+                        layer.msg("添加成功!");
+
+                    }
+                })
+                return false;
+            });
+            $(document).ready(function () {
+                //获取所有楼id
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
                         url: "../Course?action=getAllLocation",
                         success: function (result) {
                             for (var index = 0; index < result.length; index++)
