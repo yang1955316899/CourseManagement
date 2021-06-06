@@ -155,8 +155,4 @@ public class CounselorServlet extends BaseServlet {
 		String jsonListString = gson.toJson(myMap);
 		resp.getWriter().write(jsonListString);
 	}
-
-	public void getClassGrades(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-	}
 }

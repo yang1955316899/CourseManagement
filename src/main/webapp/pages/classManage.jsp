@@ -17,7 +17,7 @@
     <link href="../static/layuiadmin/layui/css/layui.css" media="all" rel="stylesheet">
     <link href="../static/layuiadmin/layui/css/public.css" media="all" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: white">
 <div class="layuimini-container">
     <div class="layuimini-main">
 

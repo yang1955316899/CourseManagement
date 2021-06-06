@@ -3,8 +3,8 @@ package top.jsjkxyjs.service.impl;
 import top.jsjkxyjs.dao.CounselorDao;
 import top.jsjkxyjs.dao.impl.CounselorDaoImpl;
 import top.jsjkxyjs.entity.Class;
+import top.jsjkxyjs.entity.Grade;
 import top.jsjkxyjs.entity.SC;
-import top.jsjkxyjs.entity.StudentGrade;
 import top.jsjkxyjs.entity.User;
 import top.jsjkxyjs.service.CounselorService;
 
@@ -101,35 +101,35 @@ public class CounselorServiceImpl implements CounselorService {
      * @return 成绩列表
      */
     @Override
-    public List<StudentGrade> doGetGradeByClass(int classId) {
-        List<StudentGrade> gradeList = new ArrayList<>();
+    public List<User> doGetGradeByClass(int classId) {
         CounselorDao dao = new CounselorDaoImpl();
         //获取班级所有学生信息,包含userId和userName
         List<User> userList = dao.getClassUser(classId);
+        //获取最大课程数
+        int max = 0;
         //对所有学生依次获取其课程成绩
-        for (int i = 0; i < userList.size(); i++) {
+        for (int i = 0; i < userList.size(); i++) {//获取每个学生的userId
+            int userId = userList.get(i).getUserId();
             //通过userId获取grade和courseId
-            List<SC> scList = dao.getScByUserId(userList.get(i).getUserId());
+            List<SC> scList = dao.getScByUserId(userId);
+            if (scList.size() > max) {
+                max = scList.size();
+            }
             //通过courseId获取courseName
             List<String> courseNameList = new ArrayList<>();
-            for (int j = 0; j < scList.size(); i++) {
-                courseNameList.add(dao.getCourseNameById(scList.get(j).getCourseId()));
-            }
-            StudentGrade grade = new StudentGrade();
-            grade.setStudentId(userList.get(i).getUserId());
-            grade.setStudentName(userList.get(i).getUserName());
-
             for (int j = 0; j < scList.size(); j++) {
-                StudentGrade.course course = grade.new course();
-                course.setCourseName(courseNameList.get(j));
-                course.setGrade(scList.get(i).getGrade());
-                grade.courseList.add(course);
+                int courseId = scList.get(j).getCourseId();
+                courseNameList.add(dao.getCourseNameById(courseId));
             }
-            grade.setStudentId(userList.get(i).getUserId());
-            grade.setStudentName(userList.get(i).getUserName());
-            gradeList.add(grade);
+            for (int j = 0; j < scList.size(); j++) {
+                Grade grade = new Grade();
+                grade.setCourseName(courseNameList.get(j));
+                int scGrade = scList.get(j).getGrade();
+                grade.setGrade(scGrade);
+                userList.get(i).gradeList.add(grade);
+            }
         }
-        return gradeList;
+        return userList;
     }
 }
 
