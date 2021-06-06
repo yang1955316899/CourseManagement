@@ -1,7 +1,6 @@
 package top.jsjkxyjs.service;
 
 import top.jsjkxyjs.entity.Class;
-import top.jsjkxyjs.entity.StudentGrade;
 import top.jsjkxyjs.entity.User;
 
 import java.util.List;
@@ -73,5 +72,5 @@ public interface CounselorService {
      * @param classId 班级编号
      * @return 成绩列表
      */
-    List<StudentGrade> doGetGradeByClass(int classId);
+    List<User> doGetGradeByClass(int classId);
 }

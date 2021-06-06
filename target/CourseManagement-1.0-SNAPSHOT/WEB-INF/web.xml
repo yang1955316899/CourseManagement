@@ -48,5 +48,13 @@
         <url-pattern>/Teacher</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PersonalServlet</servlet-name>
+        <servlet-class>top.jsjkxyjs.controller.PersonalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalServlet</servlet-name>
+        <url-pattern>/PersonalServlet</url-pattern>
+    </servlet-mapping>
 
 </web-app>

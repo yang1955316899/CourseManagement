@@ -48,5 +48,22 @@
         <url-pattern>/Teacher</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PersonalServlet</servlet-name>
+        <servlet-class>top.jsjkxyjs.controller.PersonalServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonalServlet</servlet-name>
+        <url-pattern>/PersonalServlet</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>PagesFilter</filter-name>
+        <filter-class>top.jsjkxyjs.filter.PagesFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>PagesFilter</filter-name>
+        <url-pattern>/pages/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

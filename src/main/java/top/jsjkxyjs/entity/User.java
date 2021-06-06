@@ -1,5 +1,8 @@
 package top.jsjkxyjs.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
 	private int id;
 	private int userId;
@@ -8,15 +11,43 @@ public class User {
 	private String password;
 	private int sex;
 	private int classId;
+	private String className;
 	private int age;
+	private String roleName;
+	public List<Grade> gradeList = new ArrayList<>();
 
-	public int getAge() {
-		return age;
+	public List<Grade> getGradeList() {
+		return gradeList;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setGradeList(List<Grade> gradeList) {
+		this.gradeList = gradeList;
 	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
 	public int getClassId() {
 		return classId;

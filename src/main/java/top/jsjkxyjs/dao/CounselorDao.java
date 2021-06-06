@@ -1,7 +1,7 @@
 package top.jsjkxyjs.dao;
 
 import top.jsjkxyjs.entity.Class;
-import top.jsjkxyjs.entity.StudentGrade;
+import top.jsjkxyjs.entity.SC;
 import top.jsjkxyjs.entity.User;
 
 import java.util.List;
@@ -63,13 +63,20 @@ public interface CounselorDao {
      */
     List<User> searchUser(int userId, String userName, int classId);
 
+    /**
+     * 获取对应学生的成绩和course
+     *
+     * @param userId userId
+     * @return 成绩集合
+     */
+    List<SC> getScByUserId(int userId);
 
     /**
-     * 获取班级学生的成绩信息
+     * 获取课程名称
      *
-     * @param classId 班级号
-     * @return 学生成绩列表
+     * @param courseId 课程id
+     * @return 课程名称
      */
-    List<StudentGrade> getGradesByClass(int classId);
+    String getCourseNameById(int courseId);
 
 }

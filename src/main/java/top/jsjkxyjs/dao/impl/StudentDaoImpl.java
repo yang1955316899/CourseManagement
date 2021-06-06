@@ -5,11 +5,7 @@ import top.jsjkxyjs.dao.StudentDao;
 import java.util.List;
 
 public class StudentDaoImpl extends BaseDao implements StudentDao {
-//	@Override
-//	public List<String> getUserCourseByUserId(int UserId) {
-//		String sql = "select * from t_sc where StudentId = ?";
-//		return getStrings(sql, UserId, "CourseId");
-//	}
+
 
 	@Override
 	public List<String> getTimeByUserId(int UserId, int year, int semester, int day) {

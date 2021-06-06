@@ -16,7 +16,7 @@ public class RoomDaoImpl extends BaseDao implements RoomDao {
 		List<Location> location = new ArrayList<>();
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, "" + locationId);
+			ps.setInt(1, locationId);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				Location tem = new Location();

@@ -143,7 +143,8 @@
                         url: "../Course?action=setCourse",
                         data: data.field,
                         success: function (result) {
-                            layer.msg(result);
+                            layer.msg("添加成功!");
+
                         }
                     })
                     return false;

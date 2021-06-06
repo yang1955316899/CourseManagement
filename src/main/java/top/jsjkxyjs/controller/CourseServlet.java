@@ -9,6 +9,8 @@ import top.jsjkxyjs.service.impl.TeacherServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CourseServlet extends BaseServlet {
 	public void getAllLocation(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -67,8 +69,18 @@ public class CourseServlet extends BaseServlet {
 				, req.getParameter("Year"), req.getParameter("Semester"), req.getParameter("Week"))));
 	}
 
-	public void getAllChooseCourses(HttpServletRequest req, HttpServletResponse resp) {
+	public void getAllChooseCourses(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		Map<String, Object> Data = new HashMap<>();
+		Data.put("code", 0);
+		Data.put("data", new CourseServiceImpl().getChooseCourses(Integer.parseInt(req.getParameter("UserId"))));
+		Gson gson = new Gson();
+		String jsonListString = gson.toJson(Data);
+		resp.getWriter().write(jsonListString);
+	}
 
+	public void setChooseCourse(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		resp.getWriter().write(new Gson().toJson(new CourseServiceImpl().setChooseCourse(Integer.parseInt(req.getParameter("UserId")), Integer.parseInt(req.getParameter("CourseId")), Integer.
+				parseInt(req.getParameter("YearSemester")), Integer.parseInt(req.getParameter("Week")))));
 	}
 
 

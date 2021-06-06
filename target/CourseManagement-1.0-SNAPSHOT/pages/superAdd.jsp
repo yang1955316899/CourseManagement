@@ -22,7 +22,7 @@
         <form class="layui-form" action="">
             <!--隐藏域,用于传递学生的classId-->
             <input type="hidden" name="classId" value="${sessionScope.myClass.id}">
-
+            <%--学号--%>
             <div class="layui-form-item">
                 <label class="layui-form-label">学号</label>
                 <div class="layui-input-block">
@@ -30,7 +30,7 @@
                            class="layui-input">
                 </div>
             </div>
-
+            <%--姓名--%>
             <div class="layui-form-item">
                 <label class="layui-form-label">姓名</label>
                 <div class="layui-input-block">
@@ -38,7 +38,7 @@
                            class="layui-input">
                 </div>
             </div>
-
+            <%--密码--%>
             <div class="layui-form-item">
                 <label class="layui-form-label">密码</label>
                 <div class="layui-input-block">
@@ -46,7 +46,7 @@
                            class="layui-input">
                 </div>
             </div>
-
+            <%--性别--%>
             <div class="layui-form-item">
                 <label class="layui-form-label">性别</label>
                 <div class="layui-input-block">
@@ -54,7 +54,7 @@
                     <input type="radio" name="sex" value="0 " title="女">
                 </div>
             </div>
-
+            <%--年龄--%>
             <div class="layui-form-item">
                 <label class="layui-form-label">年龄</label>
                 <div class="layui-input-block">
@@ -62,7 +62,26 @@
                            class="layui-input">
                 </div>
             </div>
-
+            <%--角色--%>
+            <div class="layui-form-item">
+                <label class="layui-form-label">角色</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="roleId" value="1" title="超级管理员" checked="">
+                    <input type="radio" name="roleId" value="2" title="授课教师">
+                    <input type="radio" name="roleId" value="3" title="辅导员">
+                    <input type="radio" name="roleId" value="4" title="学生">
+                    <input type="radio" name="roleId" value="5" title="辅导员,授课老师">
+                </div>
+            </div>
+            <%--班级--%>
+            <div class="layui-form-item">
+                <label class="layui-form-label">班级(不是学生则填无)</label>
+                <div class="layui-input-block">
+                    <input type="text" name="className" autocomplete="off" placeholder="请输入所属班级";
+                           class="layui-input">
+                </div>
+            </div>
+            <%--提交--%>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
@@ -76,7 +95,6 @@
 
 <script src="../static/layuiadmin/layui/layui.js" charset="utf-8"></script>
 <script src="../static/js/jquery-3.6.0.min.js"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use(['form', 'layedit'], function () {
         var form = layui.form
@@ -90,11 +108,7 @@
             userId: [
                 /^\d{10}$/
                 , '请输入10位学号'
-            ] /*function (value) {
-                if (value.length < 5) {
-                    return '标题至少得5个字符啊';
-                }
-            }*/
+            ]
             , password: [
                 /^[\S]{6,12}$/
                 , '密码必须6到12位，且不能出现空格'
@@ -105,29 +119,26 @@
             , age: [
                 /^(?:[1-9][0-9]?|1[01][0-9]|120)$/
                 , '请输入正确年龄'
-            ]
+            ],
         });
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-            console.log(data.field);
+
             $.ajax({
-                url: "../CounselorServlet?action=addStudent",  //servlet接口路径
+                url: "../SuperManageServlet?action=superAdd",  //servlet接口路径
                 type: 'post',                              //提交类型
                 dataType: 'json',                //数据类型
                 data: data.field, //数据
                 async: false,
                 success: function (data) {
                     console.log("添加成功");
-                    document.querySelector('.layui-layer-close').click();
-                },
+                    alert("用户添加成功")
+                    },
                 error: function () {
                     console.log("回调失败");
                 }
             });
-            /*$.getJSON("../CounselorServlet?action=addStudent",data.field,function(data){
-                console.log("添加的回调函数");
-            });*/
         });
     });
 </script>

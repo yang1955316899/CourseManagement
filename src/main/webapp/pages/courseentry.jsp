@@ -133,26 +133,27 @@
         layui.use(['layer', 'form'], function () {
                 var layer = layui.layer
                     , form = layui.form;
-                form.on('submit(submit)', function (data) {
+            form.on('submit(submit)', function (data) {
 
-                    console.log(data.field);
-                    //表单提交
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
-                        url: "../Course?action=setCourse",
-                        data: data.field,
-                        success: function (result) {
-                            layer.msg(result);
-                        }
-                    })
-                    return false;
-                });
-                $(document).ready(function () {
-                    //获取所有楼id
-                    $.ajax({
-                        type: "POST",
-                        dataType: "json",
+                console.log(data.field);
+                //表单提交
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "../Course?action=setCourse",
+                    data: data.field,
+                    success: function (result) {
+                        layer.msg("添加成功!");
+
+                    }
+                })
+                return false;
+            });
+            $(document).ready(function () {
+                //获取所有楼id
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
                         url: "../Course?action=getAllLocation",
                         success: function (result) {
                             for (var index = 0; index < result.length; index++)
@@ -272,33 +273,33 @@
                                 if (result.length !== 0) {
                                     for (var index = 0; index < result.length; index++) {
                                         for (var char = 0; char < 14; char++) {
-                                            if (result[index][char] == "0")
+                                            if (result[index][char] === "0")
                                                 list[char] = 0;
                                         }
                                     }
                                     for (var index = 0; index <= 12; index++) {
                                         if (list[index] !== 0) list[index] = 1;
                                     }
-                                    } else {
-                                        var list = [];
-                                        for (var index = 0; index <= 12; index++) {
-                                            list[index] = 1;
-                                        }
+                                } else {
+                                    var list = [];
+                                    for (var index = 0; index <= 12; index++) {
+                                        list[index] = 1;
                                     }
-                                    $('#classCode').empty();
-                                    var flag = 0;
-                                    for (var index = 1; index <= 12; index++) {
-                                        if (list[index] == 1) {
-                                            flag = 1;
-                                            $('#classCode').append("<input name=" + index + " title=" + index + " type=\"checkbox\">");
-                                        }
-                                    }
-                                    if (flag == 0)
-                                        $('#classCode').append("<input disabled=\"disabled\" title=\"暂无可用教室!\" type=\"checkbox\">");
-                                    form.render('checkbox');
-                                    console.log(list);
                                 }
-                            })
+                                $('#classCode').empty();
+                                var flag = 0;
+                                for (var index = 1; index <= 12; index++) {
+                                    if (list[index] === 1) {
+                                        flag = 1;
+                                        $('#classCode').append("<input name=" + index + " title=" + index + " type=\"checkbox\">");
+                                    }
+                                }
+                                if (flag == 0)
+                                    $('#classCode').append("<input disabled=\"disabled\" title=\"暂无可用教室!\" type=\"checkbox\">");
+                                form.render('checkbox');
+                                console.log(list);
+                            }
+                        })
                         }
 
                     }

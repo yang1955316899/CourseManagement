@@ -1,3 +1,9 @@
+<%@ page import="top.jsjkxyjs.entity.Grade" %>
+<%@ page import="top.jsjkxyjs.entity.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="top.jsjkxyjs.service.CounselorService" %>
+<%@ page import="top.jsjkxyjs.service.impl.CounselorServiceImpl" %>
+<%@ page import="top.jsjkxyjs.entity.Class" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
@@ -16,49 +22,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="../static/layuiadmin/layui/css/layui.css" media="all">
 </head>
-<body>
+<body style="background-color: white">
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-    <legend>班级学生信息查看</legend>
+    <legend>班级成绩</legend>
 </fieldset>
+
+<%
+    CounselorService service = new CounselorServiceImpl();
+    Class myClass = (Class) session.getAttribute("myClass");
+    int classId = myClass.getId();
+    System.out.println(classId);
+    List<User> userList = service.doGetGradeByClass(classId);
+    System.out.println(userList.size());
+
+%>
 
 <div class="layui-form">
     <table class="layui-table">
-        <%--表头--%>
         <thead>
-        <tr style="background-color: #01AAED">
-            <th>2019014102</th>
-            <th>杨戬问</th>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <c:forEach begin="1" end="8" var="i">
+                <th>课程名${i}</th>
+                <th>成绩</th>
+            </c:forEach>
         </tr>
-        <tr style="background-color: #2E2D3C">
-            <th>课程id</th>
-            <th>课程名</th>
-            <th>授课教师</th>
-            <th>成绩</th>
-            <th>学分</th>
-        </tr>
-
         </thead>
-        <%--表格内容--%>
         <tbody>
-        <c:forEach begin="1" end="10" var="i">
-            <tr>
-                <th>110</th>
-                <th>java面向对象程序设设计</th>
-                <th>彭伟</th>
-                <th>90</th>
-                <th>3.5</th>
-            </tr>
-        </c:forEach>
-
+        <%
+            for (int i = 0; i < userList.size(); i++) {
+        %>
+        <tr>
+            <td><%=userList.get(i).getUserId()%>
+            </td>
+            <td><%=userList.get(i).getUserName()%>
+            </td>
+            <%
+                for (int j = 0; j < 8; j++) {
+            %>
+            <td><%=userList.get(i).gradeList.get(j).getCourseName()%>
+            </td>
+            <td><%=userList.get(i).gradeList.get(j).getGrade()%>
+            </td>
+            <%
+                }
+            %>
+        </tr>
+        <%
+            }
+        %>
         </tbody>
     </table>
 </div>
+</table>
 
 <script src="../static/layuiadmin/layui/layui.js" charset="utf-8"></script>
-<script>
-
-</script>
-
 </body>
 </html>
-

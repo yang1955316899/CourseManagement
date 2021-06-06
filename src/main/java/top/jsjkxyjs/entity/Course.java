@@ -16,6 +16,23 @@ public class Course {
 	String Introduction;
 	int Choose;
 
+	public Course(int id, String courseName, int teacher, String teacherName, int room, String location, String roomName, int maxSize, String yearSemester, int week, String classCode, float credit, String introduction, int choose) {
+		this.id = id;
+		CourseName = courseName;
+		Teacher = teacher;
+		TeacherName = teacherName;
+		Room = room;
+		Location = location;
+		RoomName = roomName;
+		MaxSize = maxSize;
+		YearSemester = yearSemester;
+		Week = week;
+		ClassCode = classCode;
+		Credit = credit;
+		Introduction = introduction;
+		Choose = choose;
+	}
+
 	public Course() {
 	}
 
