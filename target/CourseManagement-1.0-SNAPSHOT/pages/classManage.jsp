@@ -17,7 +17,7 @@
     <link href="../static/layuiadmin/layui/css/layui.css" media="all" rel="stylesheet">
     <link href="../static/layuiadmin/layui/css/public.css" media="all" rel="stylesheet">
 </head>
-<body style="background-color: white">
+<body>
 <div class="layuimini-container">
     <div class="layuimini-main">
         <fieldset class="table-search-fieldset">
@@ -177,7 +177,7 @@
                     console.log(data.result);
                     table.reload('currentTableId', {
                         /***!!!!!!!数据表格的重载!!!!!！****/
-                        url: '../CounselorServlet?action=getClassUser&classId=' + classId //数据接口
+                        url: '../CounselorServlet?action=getClassUser&classId='+classId //数据接口
                         , where: {} //设定异步数据接口的额外参数
                         //,height: 300
                     });
@@ -232,6 +232,7 @@
                 let value = obj.value //得到修改后的值
                     , data = obj.data //得到所在行所有键值
                     , field = obj.field; //得到字段
+                console.log(field);
                 let bl = true;
                 /**判断修改是否符合规范**/
                 /*修改姓名*/
