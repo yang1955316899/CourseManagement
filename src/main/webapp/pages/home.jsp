@@ -1,11 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="top.jsjkxyjs.entity.Action" %><%--
-  Created by IntelliJ IDEA.
-  User: 清风
-  Date: 2021/5/28
-  Time: 21:39
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="top.jsjkxyjs.entity.Action" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -81,7 +75,7 @@
                         <dd><a lay-href="set/user/info.html">基本资料</a></dd>
                         <dd><a lay-href="set/user/password.html">修改密码</a></dd>
                         <hr>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        <dd style="text-align: center;"><a href="../SignServlet?action=signOut">退出</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-unselect>

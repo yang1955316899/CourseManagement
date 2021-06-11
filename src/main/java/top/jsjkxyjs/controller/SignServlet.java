@@ -57,8 +57,6 @@ public class SignServlet extends BaseServlet {
 			if (roleId == 3 || roleId == 5) {
 				CounselorService service = new CounselorServiceImpl();
 				Class myClass = service.doGetClass(userId);
-				/*List<User> gradeList = service.doGetGradeByClass(myClass.getId());
-				session.setAttribute("gradesList", gradeList);*/
 				session.setAttribute("myClass", myClass);
 			}
 			session.setAttribute("user", user);

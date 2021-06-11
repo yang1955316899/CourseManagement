@@ -34,6 +34,7 @@ public class SignDaoImpl extends BaseDao implements SignDao {
 
 	@Override
 	public void signOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		req.getSession().removeAttribute("user");
 		resp.sendRedirect("/index.html");
 	}
 }
