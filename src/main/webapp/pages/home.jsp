@@ -7,7 +7,8 @@
     <title>layuiAdmin std - 通用后台管理模板系统（iframe标准版）</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" href="../static/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="../static/layuiadmin/style/admin.css" media="all">
 
@@ -90,31 +91,34 @@
                 <div class="layui-logo" lay-href="home/console.html">
                     <span>你好！ ${sessionScope.user.userName}</span>
                 </div>
-                <div class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                <div class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
+                     lay-filter="layadmin-system-side-menu">
                     <%
-                        List list = (List)request.getAttribute("actionsList");
-                        if(list == null){
+                        List list = (List) request.getAttribute("actionsList");
+                        if (list == null) {
                             response.sendRedirect("login.jsp");
                             return;
                         }
-                        for (int i = 0;i < list.size();i++){
-                            Action action1 = (Action)list.get(i);
+                        for (int i = 0; i < list.size(); i++) {
+                            Action action1 = (Action) list.get(i);
                     %>
                     <dl data-name="home" class="layui-nav-item layui-nav-itemed">
-                        <a  lay-href="javascript:;" lay-tips="主页" lay-direction="2">
-                            <cite><%=action1.getTitle()%></cite>
+                        <a lay-href="javascript:;" lay-tips="主页" lay-direction="2">
+                            <cite><%=action1.getTitle()%>
+                            </cite>
                         </a>
                         <dd class="layui-nav-child">
                             <ul>
                                 <%
-                                    List list2 = (List)request.getAttribute("allActionsList");
-                                    for (int j = 0; j < list2.size(); j++){
-                                        Action action2 = (Action)list2.get(j);
-                                        if (action1.getId() == action2.getpId()){
+                                    List list2 = (List) request.getAttribute("allActionsList");
+                                    for (int j = 0; j < list2.size(); j++) {
+                                        Action action2 = (Action) list2.get(j);
+                                        if (action1.getId() == action2.getpId()) {
                                 %>
                                 <li data-name="console" <% if (j == 1){
                                     %>class="layui-show"<%}%>>
-                                    <a lay-href="<%=action2.getUrl()%>"><%=action2.getTitle()%></a>
+                                    <a lay-href="<%=action2.getUrl()%>"><%=action2.getTitle()%>
+                                    </a>
                                 </li>
                                 <%
                                         }

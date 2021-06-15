@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class SignDaoImpl extends BaseDao implements SignDao {
-
-
 	@Override
 	public int getRoleId(User user) {
 		conn = getConnection();
@@ -31,7 +29,6 @@ public class SignDaoImpl extends BaseDao implements SignDao {
 		}
 		return roleId;
 	}
-
 	@Override
 	public void signOut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		req.getSession().removeAttribute("user");
